@@ -21,7 +21,7 @@
       "company": "Surescripts",
       "website": "http://surescripts.com",
       "position": "Senior Software Engineer",
-      "startDate": "2001-12-31",
+      "startDate": "2002-01",
       "endDate": "Current",
       "summary": "Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. ",
       "highlights": []
@@ -30,8 +30,8 @@
       "company": "Health Nexis",
       "website": "",
       "position": "Software Developer",
-      "startDate": "2001",
-      "endDate": "2002",
+      "startDate": "2001-06",
+      "endDate": "2002-01",
       "summary": "Developed systems to translate EDI messages. ",
       "highlights": []
     },
@@ -39,8 +39,8 @@
       "company": "Qwest Communications",
       "website": "",
       "position": "Software Developer",
-      "startDate": "1996",
-      "endDate": "2001",
+      "startDate": "1996-01",
+      "endDate": "2001-06",
       "summary": "Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.",
       "highlights": []
     }
@@ -59,26 +59,34 @@
   "skills": [
     {
       "name": "Backend Development",
-      "level": "Master",
+      "level": "",
       "keywords": [
-        "Java/C#/Perl/Python",
-        "SQL, Some Hadoop",
-        ""
+        "Java",
+        "C#",
+        "Perl",
+        "Python",
+        "SQL",
+        "Some Hadoop",
+        "Queuing Systems",
+        "Oracle"
       ]
     },
     {
       "name": "Web Development",
       "level": "",
       "keywords": [
-        "HTML/CSS",
-		"javascript"
+        "HTML",
+        "CSS",
+        "javascript"
       ]
     },
     {
       "name": "Healthcare",
       "level": "",
       "keywords": [
-        "X12/NCPDP/HL7"
+        "X12",
+        "NCPDP",
+        "HL7"
       ]
     }
   ],

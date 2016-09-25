@@ -16,7 +16,7 @@ employment:
       employer: Surescripts
       summary: 'Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. '
       current: true
-      start: '2001-12-31'
+      start: 2002-01
       end: Current
       url: 'http://surescripts.com'
       keywords: []
@@ -25,8 +25,8 @@ employment:
       position: 'Software Developer'
       employer: 'Health Nexis'
       summary: 'Developed systems to translate EDI messages. '
-      start: '2001'
-      end: '2002'
+      start: 2001-06
+      end: 2002-01
       url: ""
       keywords: []
       highlights: []
@@ -34,8 +34,8 @@ employment:
       position: 'Software Developer'
       employer: 'Qwest Communications'
       summary: 'Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.'
-      start: '1996'
-      end: '2001'
+      start: 1996-01
+      end: 2001-06
       url: ""
       keywords: []
       highlights: []
@@ -51,27 +51,34 @@ education:
       summary: ""
       area: 'Computer Science, Mathematics'
       studyType: Bachelor
-service:
 skills:
   sets:
     -
       name: 'Backend Development'
-      level: Master
+      level: ""
       skills:
-        - 'Java/C#/Perl/Python'
-        - 'SQL, Some Hadoop'
-        - ""
+        - Java
+        - 'C#'
+        - Perl
+        - Python
+        - SQL
+        - 'Some Hadoop'
+        - 'Queuing Systems'
+        - Oracle
     -
       name: 'Web Development'
       level: ""
       skills:
-        - HTML/CSS
+        - HTML
+        - CSS
+        - javascript
     -
       name: Healthcare
       level: ""
       skills:
-        - X12/NCPDP/HL7
-writing: []
+        - X12
+        - NCPDP
+        - HL7
 social:
   -
     label: LinkedIn
