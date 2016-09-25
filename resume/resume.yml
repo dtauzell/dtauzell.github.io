@@ -1,0 +1,83 @@
+name: 'Dave Tauzell'
+info:
+meta:
+  format: FRESH@0.6.0
+  version: 0.1.0
+location:
+  city: 'San Francisco'
+  region: California
+  country: US
+  code: 'CA 94115'
+  address: '2712 Broadway St'
+employment:
+  history:
+    -
+      position: 'Senior Software Engineer'
+      employer: Surescripts
+      summary: 'Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. '
+      current: true
+      start: '2001-12-31'
+      end: Current
+      url: 'http://surescripts.com'
+      keywords: []
+      highlights: []
+    -
+      position: 'Software Developer'
+      employer: 'Health Nexis'
+      summary: 'Developed systems to translate EDI messages. '
+      start: '2001'
+      end: '2002'
+      url: ""
+      keywords: []
+      highlights: []
+    -
+      position: 'Software Developer'
+      employer: 'Qwest Communications'
+      summary: 'Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.'
+      start: '1996'
+      end: '2001'
+      url: ""
+      keywords: []
+      highlights: []
+education:
+  level: ""
+  history:
+    -
+      institution: 'University of Minnesota'
+      start: '1993'
+      end: '1997'
+      grade: ""
+      curriculum: []
+      summary: ""
+      area: 'Computer Science, Mathematics'
+      studyType: Bachelor
+service:
+skills:
+  sets:
+    -
+      name: 'Backend Development'
+      level: Master
+      skills:
+        - 'Java/C#/Perl/Python'
+        - 'SQL, Some Hadoop'
+        - ""
+    -
+      name: 'Web Development'
+      level: ""
+      skills:
+        - HTML/CSS
+    -
+      name: Healthcare
+      level: ""
+      skills:
+        - X12/NCPDP/HL7
+writing: []
+social:
+  -
+    label: LinkedIn
+    network: LinkedIn
+    url: 'https://www.linkedin.com/in/dtauzell'
+    user: ""
+interests: []
+testimonials: 0
+languages: []
