@@ -1,0 +1,96 @@
+{
+  "basics": {
+    "name": "Dave Tauzell",
+    "label": "Software Developer",
+    "picture": "",
+    "email": "dave@tauzell.org",
+    "phone": "262.325.1180",
+    "website": "http://www.tauzell.org",
+    "summary": "Software Developer with experience designing, coding and maintaining high volume, low downtime systems.",
+    "location": {
+      "address": "2712 Broadway St",
+      "postalCode": "CA 94115",
+      "city": "San Francisco",
+      "countryCode": "US",
+      "region": "California"
+    },
+    "profiles": [
+      {
+        "network": "LinkedIn",
+        "username": "",
+        "url": "https://www.linkedin.com/in/dtauzell"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "Surescripts",
+      "position": "Senior Software Engineer",
+      "website": "http://surescripts.com",
+      "startDate": "2001-12-31",
+      "endDate": "Current",
+      "summary": "Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. ",
+      "highlights": []
+    },
+    {
+      "company": "Health Nexis",
+      "position": "Software Developer",
+      "website": "",
+      "startDate": "2001",
+      "endDate": "2002",
+      "summary": "Developed systems to translate EDI messages. ",
+      "highlights": []
+    },
+    {
+      "company": "Qwest Communications",
+      "position": "Software Developer",
+      "website": "",
+      "startDate": "1996",
+      "endDate": "2001",
+      "summary": "Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.",
+      "highlights": []
+    }
+  ],
+  "volunteer": [],
+  "education": [
+    {
+      "institution": "University of Minnesota",
+      "area": "Computer Science, Mathematics",
+      "studyType": "Bachelor",
+      "startDate": "1993",
+      "endDate": "1997",
+      "gpa": "",
+      "courses": []
+    }
+  ],
+  "awards": [],
+  "publications": [],
+  "skills": [
+    {
+      "name": "Backend Development",
+      "level": "Master",
+      "keywords": [
+        "Java/C#/Perl/Python",
+        "SQL, Some Hadoop",
+        ""
+      ]
+    },
+    {
+      "name": "Web Development",
+      "level": "",
+      "keywords": [
+        "HTML/CSS"
+      ]
+    },
+    {
+      "name": "Healthcare",
+      "level": "",
+      "keywords": [
+        "X12/NCPDP/HL7"
+      ]
+    }
+  ],
+  "languages": [],
+  "interests": [],
+  "references": []
+}
