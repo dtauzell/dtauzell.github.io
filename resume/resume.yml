@@ -1,90 +1,80 @@
-name: 'Dave Tauzell'
-info:
-meta:
-  format: FRESH@0.6.0
-  version: 0.1.0
-location:
-  city: 'San Francisco'
-  region: California
-  country: US
-  code: 'CA 94115'
-  address: '2712 Broadway St'
-employment:
-  history:
+basics:
+  name: 'Dave Tauzell'
+  website: 'http://www.tauzell.org'
+  phone: 262.325.1180
+  email: dave@tauzell.org
+  location:
+    address: 'W239S4735 Merlin Ln'
+    postalCode: '53189'
+    city: Waukesha
+    countryCode: US
+    region: Wisconsin
+  profiles:
     -
-      position: 'Senior Software Engineer'
-      employer: Surescripts
-      summary: 'Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. '
-      current: true
-      start: 2002-01
-      end: Current
-      url: 'http://surescripts.com'
-      keywords: []
-      highlights: []
-    -
-      position: 'Software Developer'
-      employer: 'Health Nexis'
-      summary: 'Developed systems to translate EDI messages. '
-      start: 2001-06
-      end: 2002-01
-      url: ""
-      keywords: []
-      highlights: []
-    -
-      position: 'Software Developer'
-      employer: 'Qwest Communications'
-      summary: 'Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.'
-      start: 1996-01
-      end: 2001-06
-      url: ""
-      keywords: []
-      highlights: []
-education:
-  level: ""
-  history:
-    -
-      institution: 'University of Minnesota'
-      start: '1993'
-      end: '1997'
-      grade: ""
-      curriculum: []
-      summary: ""
-      area: 'Computer Science, Mathematics'
-      studyType: Bachelor
-skills:
-  sets:
-    -
-      name: 'Backend Development'
-      level: ""
-      skills:
-        - Java
-        - 'C#'
-        - Perl
-        - Python
-        - SQL
-        - 'Some Hadoop'
-        - 'Queuing Systems'
-        - Oracle
-    -
-      name: 'Web Development'
-      level: ""
-      skills:
-        - HTML
-        - CSS
-        - javascript
-    -
-      name: Healthcare
-      level: ""
-      skills:
-        - X12
-        - NCPDP
-        - HL7
-social:
+      network: LinkedIn
+      username: ""
+      url: 'https://www.linkedin.com/in/dtauzell'
+work:
   -
-    label: LinkedIn
-    network: LinkedIn
-    url: 'https://www.linkedin.com/in/dtauzell'
-    user: ""
+    company: Surescripts
+    website: 'http://surescripts.com'
+    position: 'Senior Software Engineer'
+    startDate: '2002-01-01'
+    endDate: ""
+    summary: 'Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. Perform security reviews, maintain build tools like Jenkins, as well as support and maintain tools used by our support team.'
+    highlights: []
+  -
+    company: 'Health Nexis'
+    website: ""
+    position: 'Software Developer'
+    startDate: 2001-06
+    endDate: 2002-01
+    summary: 'Developed systems to translate EDI messages. '
+    highlights: []
+  -
+    company: 'Qwest Communications'
+    website: ""
+    position: 'Software Developer'
+    startDate: 1996-01
+    endDate: 2001-06
+    summary: 'Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.'
+    highlights: []
+education:
+  -
+    institution: 'University of Minnesota'
+    gpa: ""
+    courses: []
+    startDate: '1993'
+    endDate: '1997'
+    area: 'Computer Science, Mathematics'
+    studyType: Bachelor
+skills:
+  -
+    name: 'Backend Development'
+    level: ""
+    keywords:
+      - Java
+      - 'C#'
+      - Perl
+      - Python
+      - SQL
+      - 'Some Hadoop'
+      - 'Queuing Systems'
+      - Oracle
+  -
+    name: 'Web Development'
+    level: ""
+    keywords:
+      - HTML
+      - CSS
+      - javascript
+  -
+    name: Healthcare
+    level: ""
+    keywords:
+      - X12
+      - NCPDP
+      - HL7
 interests: []
-testimonials: 0
+references: 0
 languages: []

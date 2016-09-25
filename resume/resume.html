@@ -1,344 +1,287 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
     
     <head>
-        <meta charset="utf-8">
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, user-scalable=no, minimal-ui'>
         <title>Dave Tauzell</title>
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,600italic,700,700italic'
-        rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
         <style>
-            * {
-              box-sizing: border-box;
-            }
-            
-            main {
-              display: block;
-            }
-            
             body {
-              font-family: 'Helvetica Neue', 'Helvetica', 'Segoe UI', 'Calibri', 'sans-serif';
-              font-size: 15px;
-              color: #333;
-              line-height: 1.42857143;
-              background-color: #F0F0F0;
-              margin: 0;
-              padding: 0;
+              background: #EEEEEE;
+              font: 12px "Times New Roman", Times, sans-serif;
+              line-height: 1.4;
+              margin: 40px 0;
             }
-            
-            /* Typical page borders are awkward when rendered to PDF. */
-            body.pdf {
-              background-color: #FFFFFF;
+            em {
+              color: #999;
             }
-            
-            /* Adobe or wkhtmltopdf has issues with the <main> tag, so we use <div> for
-            the PDF case, <main> for the HTML case, and style both via an ID. */
-            #main {
-              background-color: #FFF;
-              margin: 10px;
-              padding: 10px;
-              border: 1px solid #E6E6E6;
+            p {
+              line-height: 1.4;
             }
-            
-            body.pdf > #main {
-              border: none;
-            }
-            
-            #container > header {
-              padding-top: 6em;
-              padding-bottom: 1em;
-            }
-            
-            body.pdf #container > header {
-              padding: 0;
-            }
-            
-            #main > #container > section {
-              margin-left: 5em;
-              position: relative;
-              display: block;
-            }
-            
-            span.fa
-            {
-              position: absolute;
-              top: 4px;
-              left: -50px;
-              font-size: 30px;
-              color: #BFC1C3;
-            }
-            
-            hr {
-              margin-top: 20px;
-              margin-bottom: 20px;
-              border: 0;
-              border-top: 1px solid #EEE;
-            }
-            
-            .tenure, .keywords {
-              font-size: 75%;
-            }
-            
-            h1 {
-              margin: 0;
-              font-size: 46px;
-            }
-            
-            h2 {
-              font-size: 24px;
-              color: #BFC1C3;
-              text-transform: uppercase;
-              font-weight: normal;
-            }
-            
-            h3 {
+            ul {
               margin-bottom: 0;
-              font-size: 18px;
             }
-            
-            a, a:visited {
-              color: #428BCA;
+            li {
+              margin-bottom: 2px;
+            }
+            a {
               text-decoration: none;
-              font-weight: bold;
             }
             
-            a:hover {
-              text-decoration: underline;
+            #resume {
+              margin: 0 auto;
+              max-width: 600px;
+              padding: 80px 100px;
+              background: #fff;
+              border: 1px solid #ccc;
+              box-shadow: 2px 2px 4px #aaa;
+              -webkit-box-shadow: 2px 2px 4px #aaa;
             }
             
-            .defunct {
-              color: #989898;
-              font-weight: bold;
-            }
-            
-            #summary > p > strong {
-              font-size: 1.25em;
-            }
-            
-            
-            .label-keyword {
+            .coursesList {
+              width: 28%;
+              vertical-align: top;
               display: inline-block;
-              background: #7eb0db;
-              color: white;
-              font-size: 0.9em;
-              padding: 5px;
-              border: 1px solid #357ebd;
-              border-radius: 5px;
-              margin-top: 2px;
             }
             
-            .card-skills {
-                position: relative;
-            }
-            .card-nested {
-                min-height: 0;
-                margin-bottom: 10px;
-                border-width: 1px 0 0 0;
-            }
-            .card {
-                background: #FFF;
-                border-radius: 3px;
-                padding: 10px;
+            .largeFont {
+              font-size: 20px;
             }
             
-            .skill-level {
-              border-radius: 3px;
-              position: absolute;
-              top: 10px;
-              bottom: 10px;
-              left: 0;
-              width: 10px;
-              box-shadow: inset 0 0 1px rgba(0, 0, 0, 0.5);
+            .smallFont {
+              font-size: 12px;
             }
-            .skill-level .skill-progress {
-              position: absolute;
-              border-radius: 3px;
-              bottom: 0;
+            
+            .sectionBlock {
+              display: flex;
               width: 100%;
-              -webkit-transition: height 1s ease;
             }
-            .skill-level .skill-progress.beginner {
-              height: 50%;
-              background: #e74c3c;
+            
+            .sectionName {
+              width: 18%;
+              vertical-align: top;
+              display: inline-block;
             }
-            .skill-level .skill-progress.intermediate {
-              height: 70%;
-              background: #f1c40f;
+            
+            .sectionContent {
+              width: 80%;
+              vertical-align: top;
+              display: inline-block;
             }
-            .skill-level .skill-progress.advanced {
-              height: 80%;
-              background: #428bca;
+            
+            .sectionContent ul {
+              padding-left: 20px;
+              margin-top: 6px;
+              list-style-type: circle;
             }
-            .skill-level .skill-progress.master {
-              height: 95%;
-              background: #5cb85c;
+            
+            .sectionContent .title {
+              font-weight: bold;
             }
-            .skill-info {
-              margin-left: 10px;
+            
+            .sectionContent .date {
+              float: right;
             }
-            @media (max-width: 480px) {
-              .skill-info {
-                margin-left: 20px;
+            
+            .sectionContent .separator {
+              height: 14px;
+            }
+            
+            .sectionLine {
+              border-style: dashed;
+              border-width: 1px;
+              border-color: #CFCFCF;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            
+            .divider {
+              font-weight: bold;
+              margin-left: 5px;
+              margin-right: 5px;
+            }
+            
+            .summary {
+              margin-top: 6px;
+            }
+            
+            .skillBlock {
+              margin-bottom: 4px;
+            }
+            
+            .jobBlock {
+              page-break-inside: avoid;
+            }
+            
+            /* Media Queries */
+            @media only screen and (max-width: 40em) {
+              body {
+                margin: 0;
+                font-size: 14px;
+              }
+              #resume {
+                margin: 0 auto;
+                max-width: 600px;
+                padding: 0.5em 1em;
+                border: none;
+              }
+              .sectionContent {
+                width: 100%;
+              }
+              .sectionContent .date {
+                padding-right: 2em;
+              }
+              .sectionName {
+                width: auto;
+              }
+              .largeFont {
+                font-size: 20px;
+              }
+              .smallFont {
+                font-size: 14px;
               }
             }
             
-            .list-unstyled {
-              padding-left: 0;
-              list-style: none;
-            }
+            @media print {
+              #resume {
+                margin: 0 auto;
+                max-width: 600px;
+                padding: 0px 0px;
+                border: 0px;
+                background: #fff;
+                box-shadow: none;
+                -webkit-box-shadow: none;
+              }
             
-            .card-skills {
-              position: relative;
-            }
-            
-            .space-top {
-                margin-top: 10px;
-            }
-            
-            #container {
-              max-width: 800px;
-              margin: 0 auto;
-            }
-            
-            #elevator-pitch {
-              text-align: center;
-              font-size: 24px;
-              color: #BFC1C3;
-              text-transform: uppercase;
-              font-weight: normal;
-            }
-            
-            .res-label {
-              font-style: italic;
+              a {
+                color: black;
+              }
             }
         </style>
     </head>
     
     <body>
-        <main id="main">
-            <div id="container">
-                <header>
-                     <h1>Dave Tauzell</h1>
+        <div id='resume'>
+            <div id='nameBlock' class='largeFont'> <span class='name'>
+      Dave Tauzell
+    </span>
 
-                    <div id="contact"></div>
-                </header>
-                <hr>
-                <section id="skills">
-                    <header>
-                         <h2>Skills</h2>
-
-                    </header> <span class="fa fa-lg fa-code"></span>
-
-                    <ul class="list-unstyled">
-                        <li class="card card-nested card-skills">
-                            <div class="skill-level" rel="tooltip" title="" data-placement="left">
-                                <div class="skill-progress "></div>
-                            </div>
-                            <div class="skill-info"> <strong>Backend Development</strong>
-
-                                <div class="space-top labels"> <span class="label label-keyword">Java</span>
- <span class="label label-keyword">C#</span>
-
-                                    <span
-                                    class="label label-keyword">Perl</span> <span class="label label-keyword">Python</span>
- <span class="label label-keyword">SQL</span>
-
-                                        <span
-                                        class="label label-keyword">Some Hadoop</span> <span class="label label-keyword">Queuing Systems</span>
-
-                                            <span
-                                            class="label label-keyword">Oracle</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card card-nested card-skills">
-                            <div class="skill-level" rel="tooltip" title="" data-placement="left">
-                                <div class="skill-progress "></div>
-                            </div>
-                            <div class="skill-info"> <strong>Web Development</strong>
-
-                                <div class="space-top labels"> <span class="label label-keyword">HTML</span>
- <span class="label label-keyword">CSS</span>
-
-                                    <span
-                                    class="label label-keyword">javascript</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="card card-nested card-skills">
-                            <div class="skill-level" rel="tooltip" title="" data-placement="left">
-                                <div class="skill-progress "></div>
-                            </div>
-                            <div class="skill-info"> <strong>Healthcare</strong>
-
-                                <div class="space-top labels"> <span class="label label-keyword">X12</span>
- <span class="label label-keyword">NCPDP</span>
-
-                                    <span
-                                    class="label label-keyword">HL7</span>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </section>
-                <hr>
-                <section id="employment">
-                    <header> <span class="fa fa-lg fa-building"></span> 
-                         <h2>employment</h2>
-
-                    </header>
-                    <div>
-                         <h3><em>Senior Software Engineer</em>,
-    <a href="http://surescripts.com">Surescripts</a>
-    </h3>
- <span class="tenure">2002-01 — Present</span>
-
-                        <p>
-                            <p>Team lead for the infrastructure team. I design, code and maintain a high
-                                volume, highly available healthcare system.</p>
-                        </p>
-                    </div>
-                    <div>
-                         <h3><em>Software Developer</em>,
-    Health Nexis
-    </h3>
- <span class="tenure">2001-06 — 2002-01</span>
-
-                        <p>
-                            <p>Developed systems to translate EDI messages.</p>
-                        </p>
-                    </div>
-                    <div>
-                         <h3><em>Software Developer</em>,
-    Qwest Communications
-    </h3>
- <span class="tenure">1996-01 — 2001-06</span>
-
-                        <p>
-                            <p>Developed in-house web applications for support staff. Created web services
-                                to integrate Smalltalk and Perl systems. System administrator for a small
-                                set of Linux servers.</p>
-                        </p>
-                    </div>
-                </section>
-                <hr>
-                <section id="education">
-                    <header> <span class="fa fa-lg fa-mortar-board"></span> 
-                         <h2>education</h2>
-
-                    </header>
-                    <div>
-                        
-<h3>
-University of Minnesota
-</h3>
-
-<span class="tenure">1993-01 — 1997-01</span>
-
-                    </div>
-                </section>
             </div>
-        </main>
+            <div id='basicsBlock' class='smallFont'>
+                <div class='contactBlock'> <span class='email'>dave@tauzell.org</span>
+ <span class='divider'>|</span>
+
+                    <span
+                    class='phone'>262.325.1180</span> <span class='divider'>|</span>
+ <span class='address'>
+          Waukesha, Wisconsin, US
+        </span>
+
+                </div>
+                <div id='profilesBlock'> <span class='url'>
+              <a href='https://www.linkedin.com/in/dtauzell'>https://www.linkedin.com/in/dtauzell</a>
+            </span>
+
+                </div>
+            </div>
+            <div class='sectionLine'></div>
+            <div id='workBlock' class="sectionBlock">
+                <div class='sectionName'> <span>EXPERIENCE</span>
+
+                </div>
+                <div class='sectionContent'>
+                    <div class="jobBlock">
+                        <div class='blockHeader'> <span class='title'>
+	          Surescripts, Senior Software Engineer
+	        </span>
+ <span class='date'>
+	          2002-01-01 &mdash; Present
+	        </span>
+
+                        </div>
+                        <div><a href='http://surescripts.com'>http://surescripts.com</a>
+                        </div>
+                        <ul class='highlights'>
+                            <li>Team lead for the infrastructure team. I design, code and maintain a high
+                                volume, highly available healthcare system. Perform security reviews, maintain
+                                build tools like Jenkins, as well as support and maintain tools used by
+                                our support team.</li>
+                        </ul>
+                        <div class='separator'></div>
+                    </div>
+                    <div class="jobBlock">
+                        <div class='blockHeader'> <span class='title'>
+	          Health Nexis, Software Developer
+	        </span>
+ <span class='date'>
+	          2001-06 &mdash; 2002-01
+	        </span>
+
+                        </div>
+                        <div><a href=''></a>
+                        </div>
+                        <ul class='highlights'>
+                            <li>Developed systems to translate EDI messages.</li>
+                        </ul>
+                        <div class='separator'></div>
+                    </div>
+                    <div class="jobBlock">
+                        <div class='blockHeader'> <span class='title'>
+	          Qwest Communications, Software Developer
+	        </span>
+ <span class='date'>
+	          1996-01 &mdash; 2001-06
+	        </span>
+
+                        </div>
+                        <div><a href=''></a>
+                        </div>
+                        <ul class='highlights'>
+                            <li>Developed in-house web applications for support staff. Created web services
+                                to integrate Smalltalk and Perl systems. System administrator for a small
+                                set of Linux servers.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class='sectionLine'></div>
+            <div id='education' class="sectionBlock">
+                <div class='sectionName'> <span>EDUCATION</span>
+
+                </div>
+                <div class='sectionContent'>
+                    <div class='educationBlock'> <span class='title'>
+          University of Minnesota
+        </span>
+ <span class='date'>
+          1993 &mdash; 1997
+        </span>
+
+                        <div class=''>Bachelor - Computer Science, Mathematics, GPA:</div>
+                    </div>
+                </div>
+            </div>
+            <div class='sectionLine'></div>
+            <div id='skills' class="sectionBlock">
+                <div class='sectionName'> <span>SKILLS</span>
+
+                </div>
+                <div class='sectionContent'>
+                    <div class='skillBlock'> <span class='title'>Backend Development <em>()</em>:</span>
+ <span>Java</span>, <span>C#</span>, <span>Perl</span>, <span>Python</span>, <span>SQL</span>, <span>Some Hadoop</span>, <span>Queuing Systems</span>, <span>Oracle</span>
+
+                    </div>
+                    <div class='skillBlock'> <span class='title'>Web Development <em>()</em>:</span>
+ <span>HTML</span>, <span>CSS</span>, <span>javascript</span>
+
+                    </div>
+                    <div class='skillBlock'> <span class='title'>Healthcare <em>()</em>:</span>
+ <span>X12</span>, <span>NCPDP</span>, <span>HL7</span>
+
+                    </div>
+                </div>
+            </div>
+            <div class='sectionLine'></div>
     </body>
 
 </html>
