@@ -104,6 +104,12 @@
       "network": "LinkedIn",
       "url": "https://www.linkedin.com/in/dtauzell",
       "user": ""
+    },
+    {
+      "label": "stackoverflow",
+      "network": "stackoverflow",
+      "url": "http://stackoverflow.com/users/3095/dave",
+      "user": "3095"
     }
   ],
   "interests": [],

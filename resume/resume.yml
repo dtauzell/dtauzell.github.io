@@ -1,8 +1,5 @@
 basics:
   name: 'Dave Tauzell'
-  website: 'http://www.tauzell.org'
-  phone: 262.325.1180
-  email: dave@tauzell.org
   location:
     address: 'W239S4735 Merlin Ln'
     postalCode: '53189'
@@ -14,6 +11,10 @@ basics:
       network: LinkedIn
       username: ""
       url: 'https://www.linkedin.com/in/dtauzell'
+    -
+      network: stackoverflow
+      username: '3095'
+      url: 'http://stackoverflow.com/users/3095/dave'
 work:
   -
     company: Surescripts
