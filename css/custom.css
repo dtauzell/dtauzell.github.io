@@ -1,6 +1,14 @@
-.header {
-  background-color: black;
-  color: white;
+.headerTop {
+  border-bottom: thick solid black;
+}
+ 
+.headerTop h1 {
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.menu {
+  padding-top: 1em;
 }
 
 .content {
@@ -9,7 +17,13 @@
 
 .header a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
-~   
 
+nav {
+  display: block;
+}
+
+nav {
+  list-style: none;
+}
