@@ -5,10 +5,19 @@ layout: default
 <div class="row">
   <div class="eleven columns">
     <img src="/images/logo.jpg" height="438" width="875">
+    <h2>About Me</h2>
     <p>
     	<ul>
     		<li><a href="resume/resume.html">Resume</a> (<a href="resume/resume.pdf">pdf</a> | <a href="resume/resume.txt">txt</a>)</li>
-    		<li><a href="https://davetauzell.bandcamp.com/releases">Music</li>
+    		<li><a href="https://davetauzell.bandcamp.com/releases">Music</a></li>
     </p>
+    <h2>Blog</h2>
+    <ul>
+      {% for post in site.posts %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
   </div>
 </div>
