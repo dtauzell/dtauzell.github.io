@@ -1,7 +1,7 @@
 .headerTop {
   border-bottom: thick solid black;
 }
- 
+
 .headerTop h1 {
   margin-bottom: 0px;
   padding-bottom: 0px;
@@ -13,6 +13,10 @@
 
 .content {
   padding-top: 10px;
+}
+
+.header {
+  background-color: whitesmoke;
 }
 
 .header a {
