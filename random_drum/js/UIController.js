@@ -13,6 +13,7 @@ class UIController {
         this.tempoSlider = document.getElementById('tempoSlider');
         this.tempoDisplay = document.getElementById('tempoDisplay');
         this.measuresDisplay = document.getElementById('measuresDisplay');
+        this.drumMachineSelector = document.getElementById('drumMachineSelector');
         
         // Volume sliders
         this.volumeSliders = {
@@ -46,6 +47,11 @@ class UIController {
         // Play/Pause button
         this.playPauseBtn.addEventListener('click', () => {
             this.onPlayPause?.();
+        });
+
+        // Drum machine selector
+        this.drumMachineSelector.addEventListener('change', (e) => {
+            this.onDrumMachineChange?.(e.target.value);
         });
     }
 
@@ -113,5 +119,9 @@ class UIController {
 
     setOnPlayPause(callback) {
         this.onPlayPause = callback;
+    }
+
+    setOnDrumMachineChange(callback) {
+        this.onDrumMachineChange = callback;
     }
 } 

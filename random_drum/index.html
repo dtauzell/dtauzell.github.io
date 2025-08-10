@@ -42,9 +42,19 @@
 
         <!-- Controls Section -->
         <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-            <button id="generateBtn" class="bg-violet-700 hover:bg-violet-600 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">
-                Generate New Pattern
-            </button>
+            <div class="flex flex-col gap-4">
+                <button id="generateBtn" class="bg-violet-700 hover:bg-violet-600 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">
+                    Generate New Pattern
+                </button>
+                <!-- Drum Machine Selector -->
+                <div class="flex flex-col items-center">
+                    <label for="drumMachineSelector" class="text-sm text-slate-300">Drum Machine</label>
+                    <select id="drumMachineSelector" class="bg-slate-700 text-slate-200 px-3 py-1 rounded border border-slate-600 text-sm">
+                        <option value="synth">Synthesis</option>
+                        <option value="sample">Samples</option>
+                    </select>
+                </div>
+            </div>
             <div class="flex items-center gap-4">
                 <button id="playPauseBtn" class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">
                     Play
@@ -90,6 +100,9 @@
     <!-- JavaScript Modules -->
     <script src="js/AudioManager.js"></script>
     <script src="js/DrumMachine.js"></script>
+    <script src="js/SynthDrumMachine.js"></script>
+    <script src="js/SampleDrumMachine.js"></script>
+    <script src="js/DrumMachineSelector.js"></script>
     <script src="js/PatternGenerator.js"></script>
     <script src="js/UIController.js"></script>
     <script src="js/RandomDrumApp.js"></script>

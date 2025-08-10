@@ -17,7 +17,8 @@ class RandomDrumApp {
     initialize() {
         // Initialize all components
         this.audioManager = new AudioManager();
-        this.drumMachine = new DrumMachine();
+        this.drumMachineSelector = new DrumMachineSelector();
+        this.drumMachine = this.drumMachineSelector.createDrumMachine('synth');
         this.patternGenerator = new PatternGenerator(this.drumMachine);
         this.uiController = new UIController();
 
@@ -41,6 +42,10 @@ class RandomDrumApp {
 
         this.uiController.setOnPlayPause(() => {
             this.handlePlayPause();
+        });
+
+        this.uiController.setOnDrumMachineChange((machineType) => {
+            this.handleDrumMachineChange(machineType);
         });
     }
 
@@ -105,6 +110,59 @@ class RandomDrumApp {
 
     generateInitialPattern() {
         this.generateNewPattern();
+    }
+
+    handleDrumMachineChange(machineType) {
+        try {
+            console.log(`Switching from ${this.drumMachineSelector.getCurrentType()} to ${machineType}`);
+            
+            // Stop current playback
+            if (this.audioManager.getPlayState()) {
+                this.audioManager.stop();
+            }
+
+            // Switch to new drum machine
+            this.drumMachine = this.drumMachineSelector.switchTo(machineType);
+            
+            console.log(`New drum machine type: ${this.drumMachine.constructor.name}`);
+            
+            // Update pattern generator with new drum machine
+            this.patternGenerator = new PatternGenerator(this.drumMachine);
+            
+            // Reset volume sliders to default values for the new machine
+            this.resetVolumeSliders();
+            
+            // Generate a new pattern with the new machine
+            this.generateNewPattern();
+            
+            // Update UI to show it's not playing
+            this.uiController.updatePlayPauseButton(false);
+            
+            console.log(`Successfully switched to ${machineType} drum machine`);
+        } catch (error) {
+            console.error('Error switching drum machine:', error);
+            this.uiController.showCustomAlert(`Error switching drum machine: ${error.message}`);
+        }
+    }
+
+    resetVolumeSliders() {
+        // Reset volume sliders to default values
+        const defaultVolumes = {
+            kick: -6,
+            snare: -6,
+            hihat: -8,
+            toms: -10
+        };
+
+        Object.entries(defaultVolumes).forEach(([drumType, volume]) => {
+            // Update the slider value
+            const slider = document.getElementById(`${drumType}Vol`);
+            if (slider) {
+                slider.value = volume;
+            }
+            // Set the volume on the new drum machine
+            this.drumMachine.setVolume(drumType, volume);
+        });
     }
 
     showError(message) {
