@@ -10,27 +10,11 @@ class SampleDrumMachine extends DrumMachine {
     }
 
     initializeDrums() {
-        // Initialize different synth types to simulate samples (for testing)
-        // In production, you'd use Tone.Player with actual sample files
-        this.kickPlayer = new Tone.MonoSynth({
-            oscillator: { type: 'sine' },
-            envelope: { attack: 0.01, decay: 0.2, sustain: 0.0, release: 0.1 }
-        }).toDestination();
-        
-        this.snarePlayer = new Tone.NoiseSynth({
-            noise: { type: 'white' },
-            envelope: { attack: 0.001, decay: 0.2, sustain: 0.0, release: 0.1 }
-        }).toDestination();
-        
-        this.hihatPlayer = new Tone.MetalSynth({
-            frequency: 200,
-            envelope: { attack: 0.001, decay: 0.1, sustain: 0.0, release: 0.01 }
-        }).toDestination();
-        
-        this.tomPlayer = new Tone.MonoSynth({
-            oscillator: { type: 'triangle' },
-            envelope: { attack: 0.01, decay: 0.3, sustain: 0.0, release: 0.2 }
-        }).toDestination();
+        // Initialize sample players for each drum type
+        this.kickPlayer = new Tone.Player().toDestination();
+        this.snarePlayer = new Tone.Player().toDestination();
+        this.hihatPlayer = new Tone.Player().toDestination();
+        this.tomPlayer = new Tone.Player().toDestination();
 
         // Store in arrays for easy access
         this.drums = {
@@ -41,6 +25,85 @@ class SampleDrumMachine extends DrumMachine {
         };
         
         this.drumSynths = [this.kickPlayer, this.snarePlayer, this.hihatPlayer, this.tomPlayer];
+
+        // Load sample URLs (you can customize these)
+        this.loadSamples();
+    }
+
+    loadSamples() {
+        // Example sample URLs - replace with your actual sample files
+        const sampleUrls = {
+            kick: 'samples/kick.wav',
+            snare: 'samples/snare.wav',
+            hihat: 'samples/hihat.wav',
+            toms: 'samples/tom.wav'
+        };
+
+        // Load each sample
+        Object.entries(sampleUrls).forEach(([drumType, url]) => {
+            this.drums[drumType].load(url).catch(error => {
+                console.warn(`Failed to load ${drumType} sample:`, error);
+                // Fallback to a simple beep if sample fails to load
+                this.createFallbackSound(drumType);
+            });
+        });
+    }
+
+    createFallbackSound(drumType) {
+        // Create a simple fallback sound if sample loading fails
+        let fallbackSynth;
+        
+        switch(drumType) {
+            case 'kick':
+                fallbackSynth = new Tone.MonoSynth({
+                    oscillator: { type: 'sine' },
+                    envelope: { attack: 0.01, decay: 0.2, sustain: 0.0, release: 0.1 }
+                }).toDestination();
+                break;
+            case 'snare':
+                fallbackSynth = new Tone.NoiseSynth({
+                    noise: { type: 'white' },
+                    envelope: { attack: 0.001, decay: 0.2, sustain: 0.0, release: 0.1 }
+                }).toDestination();
+                break;
+            case 'hihat':
+                fallbackSynth = new Tone.MetalSynth({
+                    frequency: 200,
+                    envelope: { attack: 0.001, decay: 0.1, sustain: 0.0, release: 0.01 }
+                }).toDestination();
+                break;
+            case 'toms':
+                fallbackSynth = new Tone.MonoSynth({
+                    oscillator: { type: 'triangle' },
+                    envelope: { attack: 0.01, decay: 0.3, sustain: 0.0, release: 0.2 }
+                }).toDestination();
+                break;
+        }
+        
+        if (fallbackSynth) {
+            // Replace the failed player with the fallback synth
+            this.drums[drumType] = fallbackSynth;
+            this.drumSynths[this.drumLabels.indexOf(drumType.charAt(0).toUpperCase() + drumType.slice(1))] = fallbackSynth;
+            
+            // Override the playDrum method for this specific drum type
+            const originalPlayDrum = this.playDrum.bind(this);
+            this.playDrum = function(drumIndex, time) {
+                const drumLabel = this.drumLabels[drumIndex];
+                const drumType = drumLabel.toLowerCase().replace('-', '');
+                
+                if (drumType === drumType && this.drums[drumType] === fallbackSynth) {
+                    // Use fallback synth with note
+                    if (drumType === 'kick' || drumType === 'toms') {
+                        fallbackSynth.triggerAttackRelease('C2', '8n', time);
+                    } else {
+                        fallbackSynth.triggerAttackRelease('8n', time);
+                    }
+                } else {
+                    // Use original method
+                    originalPlayDrum.call(this, drumIndex, time);
+                }
+            }.bind(this);
+        }
     }
 
     setVolume(drumType, volume) {
@@ -53,16 +116,8 @@ class SampleDrumMachine extends DrumMachine {
         const player = this.drumSynths[drumIndex];
         const drumLabel = this.drumLabels[drumIndex];
         
-        // Start the sample at the specified time
-        if (drumLabel === 'Kick') {
-            player.triggerAttackRelease('C2', '8n', time);
-        } else if (drumLabel === 'Snare') {
-            player.triggerAttackRelease('8n', time);
-        } else if (drumLabel === 'Hi-Hat') {
-            player.triggerAttackRelease('8n', time);
-        } else if (drumLabel === 'Toms') {
-            player.triggerAttackRelease('C2', '8n', time);
-        }
+        // Play the sample at its original pitch (no pitch shifting)
+        player.start(time);
         
         // Debug log to verify which machine is playing
         console.log(`SampleDrumMachine playing ${drumLabel}`);
