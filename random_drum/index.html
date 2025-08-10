@@ -41,30 +41,35 @@
         <h1 class="text-3xl font-bold text-center mb-8 text-violet-400">Random Drum Machine</h1>
 
         <!-- Controls Section -->
-        <div class="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
-            <div class="flex flex-col gap-4">
+        <div class="flex flex-col items-center gap-6 mb-8">
+            <!-- Top row: Generate and Play buttons -->
+            <div class="flex gap-4">
                 <button id="generateBtn" class="bg-violet-700 hover:bg-violet-600 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">
                     Generate New Pattern
                 </button>
+                <button id="playPauseBtn" class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">
+                    Play
+                </button>
+            </div>
+            
+            <!-- Bottom row: Controls stacked vertically -->
+            <div class="flex flex-col items-center gap-4">
                 <!-- Drum Machine Selector -->
                 <div class="flex flex-col items-center">
-                    <label for="drumMachineSelector" class="text-sm text-slate-300">Drum Machine</label>
                     <select id="drumMachineSelector" class="bg-slate-700 text-slate-200 px-3 py-1 rounded border border-slate-600 text-sm">
                         <option value="synth">Synthesis</option>
                         <option value="sample">Samples</option>
                     </select>
                 </div>
-            </div>
-            <div class="flex items-center gap-4">
-                <button id="playPauseBtn" class="bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg shadow transition-colors">
-                    Play
-                </button>
+                
+                <!-- Tempo Control -->
                 <div class="flex flex-col items-center">
                     <label for="tempoSlider" class="text-sm">Tempo</label>
                     <input type="range" id="tempoSlider" min="40" max="200" value="120" class="w-32 md:w-40">
                     <span id="tempoDisplay" class="text-xs text-slate-400">120 BPM</span>
                 </div>
-                <!-- New Measures Display -->
+                
+                <!-- Measures Display -->
                 <div class="flex flex-col items-center">
                     <label class="text-sm">Measures</label>
                     <span id="measuresDisplay" class="text-xs text-slate-400"></span>
