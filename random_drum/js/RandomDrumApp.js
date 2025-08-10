@@ -18,7 +18,7 @@ class RandomDrumApp {
         // Initialize all components
         this.audioManager = new AudioManager();
         this.drumMachineSelector = new DrumMachineSelector();
-        this.drumMachine = this.drumMachineSelector.createDrumMachine('synth');
+        this.drumMachine = this.drumMachineSelector.createDrumMachine('sample');
         this.patternGenerator = new PatternGenerator(this.drumMachine);
         this.uiController = new UIController();
 

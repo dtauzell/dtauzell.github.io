@@ -8,7 +8,7 @@ class DrumMachineSelector {
             'sample': SampleDrumMachine
         };
         this.currentMachine = null;
-        this.currentType = 'synth'; // Default to synth
+        this.currentType = 'sample'; // Default to synth
     }
 
     createDrumMachine(type) {
