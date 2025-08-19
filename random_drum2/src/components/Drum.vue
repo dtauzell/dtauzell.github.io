@@ -3,24 +3,21 @@ import Led from './Led.vue';
 import { ref, onMounted } from 'vue';
 import { DrumSound } from '@/lib/DrumSound';
 
-defineProps(['name'])
+const props = defineProps<{
+  drumSound: DrumSound;// array of objects
+}>();
 
 const led = ref<typeof Led | null>(null);
-const drumSound = ref<DrumSound | null>(null);
-
-onMounted(() => {
-  drumSound.value = new DrumSound('/samples/kick.wav', -10);
-});
 
 const hit = () => {
     led.value?.blink(50);
-    drumSound.value?.hit();
+    props.drumSound.hit();
 }
 </script>
 
 <template>
     <div class="drum-strip">
-        <div class="drum-control">{{ name }}</div>
+        <div class="drum-control">{{ drumSound.getName() }}</div>
         <div class="drum-control">
             <Led ref="led"/>
         </div>

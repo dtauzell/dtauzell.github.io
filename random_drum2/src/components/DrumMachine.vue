@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Drum from './Drum.vue';
+import { DrumKitA } from '@/lib/DrumKit';
 import * as Tone from 'tone';
 
 const handleClick = async () => {
@@ -24,11 +25,7 @@ const handleClick = async () => {
             <button @click="handleClick" class="btn-danger">Play</button>
         </div>
         <div class="control-row">
-            <Drum name="Kick"/>
-            <Drum name="Snare"/>
-            <Drum name="HiHat"/>
-            <Drum name="Cymbal"/>
-            <Drum name="Tom"/>
+        <Drum v-for="sound in DrumKitA.getSounds()":drum-sound="sound"/>
         </div>
     </div>
 </template>

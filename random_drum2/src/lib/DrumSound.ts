@@ -1,12 +1,14 @@
 import * as Tone from 'tone';
-import { markRaw } from 'vue';
+import type { StringMappingType } from 'typescript';
 
 export class DrumSound {
   private player: Tone.Player;
   private isLoaded: boolean = false;
+  private name: string;
 
-  constructor(sampleUrl: string, volume: number = 0) {
+  constructor(name: string, sampleUrl: string, volume: number = 0) {
     // Create a new Tone.Player with the drum sample
+    this.name = name;
     this.player = new Tone.Player({
       url: sampleUrl,
       volume: 0,
@@ -18,10 +20,11 @@ export class DrumSound {
       }
     }).toDestination();
 
-    markRaw(this.player);
-
   }
 
+  public getName(): string {
+    return this.name;
+  }
 
   /**
    * Plays the drum sample once
