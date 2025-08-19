@@ -1,12 +1,20 @@
 <script setup lang="ts">
 import Led from './Led.vue';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { DrumSound } from '@/lib/DrumSound';
+
 defineProps(['name'])
 
 const led = ref<typeof Led | null>(null);
+const drumSound = ref<DrumSound | null>(null);
+
+onMounted(() => {
+  drumSound.value = new DrumSound('/samples/kick.wav', -10);
+});
 
 const hit = () => {
     led.value?.blink(50);
+    drumSound.value?.hit();
 }
 </script>
 
