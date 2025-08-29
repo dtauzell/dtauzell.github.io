@@ -49,7 +49,7 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
                     // Create a hit specification with beat position and velocity
                     const velocity = 0.5 + Math.random() * 0.5; // Random velocity between 0.5 and 1.0
                     const quarterNote = Math.floor(beat/4);
-                    const sixteenthNote = beat == 0 ? 0 : Math.floor(quantization % beat);
+                    const sixteenthNote = Math.floor(beat % 4);
                     const hitSpec = `${measure}:${quarterNote}:${sixteenthNote}`;
 
                     console.log(`measure ${measure}, beat: ${beat}, spec: ${hitSpec}`)

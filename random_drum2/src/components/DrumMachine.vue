@@ -36,7 +36,7 @@ function playOrPause(): void {
         const patterns = generatePattern(drumKit, 4);
         console.log(`Pattern: ${patterns}`)
         patterns.forEach(pattern => {
-            const part = new Tone.Part((time) => {
+            const part = new Tone.Part((time: number) => {
                 pattern.getDrum().hit(time);
             }, pattern.getHits());
             part.loop = true;
