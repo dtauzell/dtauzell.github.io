@@ -38,7 +38,7 @@ export class DrumSound {
 
     try {
       // Start the player at the specified time (or immediately)
-      this.player.start(0);
+      this.player.start(time);
     } catch (error) {
       console.error('Error playing drum sample:', error);
     }

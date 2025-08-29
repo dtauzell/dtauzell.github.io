@@ -20,6 +20,13 @@ export class DrumPattern {
         return this.hits;
     }
     
+    toString(): string {
+        const drumName = this.drumSound.getName();
+        const hitCount = this.hits.length;
+        const hitsStr = this.hits.join(', ');
+        return `${drumName} Pattern (${hitCount} hits): [${hitsStr}]`;
+    }
+    
 }
 
 
