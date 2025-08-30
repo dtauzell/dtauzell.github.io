@@ -18,6 +18,28 @@ const hit = () => {
 const updateQuantization = (value: number) => {
     props.drumSound.setQuantization(value);
 };
+
+// Function to convert linear slider value to logarithmic volume
+const linearToLogVolume = (linearValue: number): number => {
+    // Convert linear 0-1 range to logarithmic minVolume to 0 dB range
+    // Use exponential curve: small movements near 0 dB, large movements near minVolume
+    const minVolume = props.drumSound.getMinimumVolume();
+    return minVolume + ((0 - minVolume) * Math.pow(linearValue, 0.3));
+};
+
+// Function to convert logarithmic volume to linear slider value
+const logToLinearVolume = (logVolume: number): number => {
+    // Convert logarithmic minVolume to 0 dB range to linear 0-1 range
+    // Inverse of the above function
+    const minVolume = props.drumSound.getMinimumVolume();
+    return Math.pow((logVolume - minVolume) / (0 - minVolume), 1/0.3);
+};
+
+// Function to update volume with logarithmic scaling
+const updateVolume = (linearValue: number) => {
+    const logVolume = linearToLogVolume(linearValue);
+    props.drumSound.setVolume(logVolume);
+};
 </script>
 
 <template>
@@ -30,12 +52,14 @@ const updateQuantization = (value: number) => {
             Vol: <input 
                 type="range" 
                 :id="`volume-${drumSound.getId()}`" 
-                min="-30" 
-                max="0" 
-                :value="drumSound.getVolume()" 
-                @input="(event) => drumSound.setVolume(Number((event.target as HTMLInputElement).value))"
+                min="0" 
+                max="1" 
+                step="0.01"
+                :value="logToLinearVolume(drumSound.getVolume())" 
+                @input="(event) => updateVolume(Number((event.target as HTMLInputElement).value))"
                 class="w-full" 
             />
+            <span class="volume-display">{{ Math.round(drumSound.getVolume()) }}dB</span>
         </div>
         <div class="drum-control">
             <select 

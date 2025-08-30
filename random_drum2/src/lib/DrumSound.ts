@@ -8,6 +8,7 @@ export class DrumSound {
   private name: string;
   private volume: number;
   private quantization: number;
+  private minimumVolume: number;
 
   constructor(id: string, name: string, sampleUrl: string, volume: number = 0) {
     // Create a new Tone.Player with the drum sample
@@ -15,6 +16,7 @@ export class DrumSound {
     this.name = name;
     this.volume = 0;
     this.quantization = 16;
+    this.minimumVolume = -50;
     this.player = new Tone.Player({
       url: sampleUrl,
       volume: 0,
@@ -42,6 +44,14 @@ export class DrumSound {
 
   public setQuantization(quantization: number){
     this.quantization = quantization;
+  }
+
+  public getMinimumVolume(): number {
+    return this.minimumVolume;
+  }
+
+  public setMinimumVolume(minimumVolume: number): void {
+    this.minimumVolume = minimumVolume;
   }
 
   /**
