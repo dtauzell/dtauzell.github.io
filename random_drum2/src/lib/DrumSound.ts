@@ -9,6 +9,7 @@ export class DrumSound {
   private volume: number;
   private quantization: number;
   private minimumVolume: number;
+  private onPlayCallback?: () => void;
 
   constructor(id: string, name: string, sampleUrl: string, volume: number = 0) {
     // Create a new Tone.Player with the drum sample
@@ -54,6 +55,10 @@ export class DrumSound {
     this.minimumVolume = minimumVolume;
   }
 
+  public setOnPlayCallback(callback: () => void): void {
+    this.onPlayCallback = callback;
+  }
+
   /**
    * Plays the drum sample once
    * @param time - Optional time to schedule the hit (default is immediate)
@@ -65,6 +70,11 @@ export class DrumSound {
     }
 
     try {
+      // Trigger the callback if set
+      if (this.onPlayCallback) {
+        this.onPlayCallback();
+      }
+      
       // Start the player at the specified time (or immediately)
       this.player.start(time);
     } catch (error) {

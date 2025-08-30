@@ -14,6 +14,16 @@ const hit = () => {
     props.drumSound.hit();
 }
 
+// Function to make LED blink when drum is played
+const blinkLed = () => {
+    led.value?.blink(50);
+};
+
+// Set up the callback when component is mounted
+onMounted(() => {
+    props.drumSound.setOnPlayCallback(blinkLed);
+});
+
 // Function to update quantization for this drum sound
 const updateQuantization = (value: number) => {
     props.drumSound.setQuantization(value);
