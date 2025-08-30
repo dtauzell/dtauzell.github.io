@@ -27,7 +27,15 @@ const updateQuantization = (value: number) => {
             <Led ref="led"/>
         </div>
         <div class="drum-control">
-            Vol: <input type="range" id="{{id}}Volume" min="-10" max="0" value="-2" class="w-full" />
+            Vol: <input 
+                type="range" 
+                :id="`volume-${drumSound.getId()}`" 
+                min="-30" 
+                max="0" 
+                :value="drumSound.getVolume()" 
+                @input="(event) => drumSound.setVolume(Number((event.target as HTMLInputElement).value))"
+                class="w-full" 
+            />
         </div>
         <div class="drum-control">
             <select 
