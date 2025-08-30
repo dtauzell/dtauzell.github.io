@@ -4,11 +4,17 @@ import type { StringMappingType } from 'typescript';
 export class DrumSound {
   private player: Tone.Player;
   private isLoaded: boolean = false;
+  private id: string;
   private name: string;
+  private volume: number;
+  private quantization: number;
 
-  constructor(name: string, sampleUrl: string, volume: number = 0) {
+  constructor(id: string, name: string, sampleUrl: string, volume: number = 0) {
     // Create a new Tone.Player with the drum sample
+    this.id = id;
     this.name = name;
+    this.volume = 0;
+    this.quantization = 16;
     this.player = new Tone.Player({
       url: sampleUrl,
       volume: 0,
@@ -22,8 +28,20 @@ export class DrumSound {
 
   }
 
+  public getId(): string {
+    return this.id;
+  }
+
   public getName(): string {
     return this.name;
+  }
+
+  public getQuantization(): number {
+    return this.quantization;
+  }
+
+  public setQuantization(quantization: number){
+    this.quantization = quantization;
   }
 
   /**

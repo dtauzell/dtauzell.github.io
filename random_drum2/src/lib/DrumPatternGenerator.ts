@@ -2,7 +2,6 @@ import { DrumPattern } from '@/lib/DrumPattern';
 import { DrumKit } from '@/lib/DrumKit';
 
 export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern[] {
-    const quantization = 16; // 16th notes per measure
     const patterns: DrumPattern[] = [];
     const sounds = kit.getSounds();
 
@@ -10,6 +9,8 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
     sounds.forEach(sound => {
         console.log(`Create pattern for sound: ${sound.getName()}`)
         const pattern = new DrumPattern(sound);
+        const quantization = sound.getQuantization();
+        console.log(`${sound.getName()}: ${sound.getQuantization()}`)
 
         for (let measure = 0; measure < measures; measure++) {
             // Generate random hits for this drum
@@ -48,13 +49,11 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
                 if (Math.random() < hitProbability) {
                     // Create a hit specification with beat position and velocity
                     const velocity = 0.5 + Math.random() * 0.5; // Random velocity between 0.5 and 1.0
-                    const quarterNote = Math.floor(beat/4);
-                    const sixteenthNote = Math.floor(beat % 4);
-                    const hitSpec = `${measure}:${quarterNote}:${sixteenthNote}`;
+                    const spec = timeSpec(measure, beat, quantization);
 
-                    console.log(`measure ${measure}, beat: ${beat}, spec: ${hitSpec}`)
+                    console.log(`measure ${measure}, beat: ${beat}, spec: ${spec}`)
 
-                    pattern.addHit(hitSpec);
+                    pattern.addHit(spec);
                 }
             }
         }
@@ -66,6 +65,35 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
     return patterns;
 }
 
+function timeSpec(measure: number, beat: number, quantization: number) {
+    const qn = quarterNote(beat, quantization);
+    const sn = sixteenthNote(beat, quantization);
 
+    return `${measure}:${qn}:${sn}`
+}
 
+function quarterNote(beat: number, quantization: number): number {
+    switch (quantization) {
+        case 4:
+            return beat;
+        case 8:
+            return Math.floor(beat / 2);
+        case 16:
+            return Math.floor(beat / 4);
+        default:
+            return 0;
+    }
+}
 
+function sixteenthNote(beat: number, quantization: number): number {
+    switch (quantization) {
+        case 4:
+            return 0;
+        case 8:
+            return (beat % 2) * 2;
+        case 16:
+            return beat % 4;
+        default:
+            return 0;
+    }
+}

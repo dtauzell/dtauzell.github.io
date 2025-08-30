@@ -20,10 +20,10 @@ export class DrumKit {
 }
 
 export const DrumKitA = new DrumKit();
-DrumKitA.addSound(new DrumSound("Kick", "/samples/kick.wav", 0));
-DrumKitA.addSound(new DrumSound("HiHat", "/samples/hihat.wav", 0));
-DrumKitA.addSound(new DrumSound("Snare", "/samples/snare.wav", 0));
-DrumKitA.addSound(new DrumSound("Tom", "/samples/tom.wav", 0));
+DrumKitA.addSound(new DrumSound("kick", "Kick", "/samples/kick.wav", 0));
+DrumKitA.addSound(new DrumSound("hihat", "Hi-Hat", "/samples/hihat.wav", 0));
+DrumKitA.addSound(new DrumSound("snare", "Snare", "/samples/snare.wav", 0));
+DrumKitA.addSound(new DrumSound("tom", "Tom", "/samples/tom.wav", 0));
 
 
 
