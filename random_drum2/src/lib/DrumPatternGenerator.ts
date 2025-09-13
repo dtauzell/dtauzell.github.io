@@ -10,7 +10,7 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
         console.log(`Create pattern for sound: ${sound.getName()}`)
         const pattern = new DrumPattern(sound);
         const quantization = sound.getQuantization();
-        console.log(`${sound.getName()}: ${sound.getQuantization()}`)
+        
 
         for (let measure = 0; measure < measures; measure++) {
             // Generate random hits for this drum

@@ -43,10 +43,6 @@ export class DrumSound {
     return this.quantization;
   }
 
-  public setQuantization(quantization: number){
-    this.quantization = quantization;
-  }
-
   public getMinimumVolume(): number {
     return this.minimumVolume;
   }

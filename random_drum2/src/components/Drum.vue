@@ -24,11 +24,7 @@ onMounted(() => {
     props.drumSound.setOnPlayCallback(blinkLed);
 });
 
-// Function to update quantization for this drum sound
-const updateQuantization = (value: number) => {
-    console.log(`Updating quantization to ${value}`);
-    props.drumSound.setQuantization(value);
-};
+
 
 // Function to convert linear slider value to logarithmic volume
 const linearToLogVolume = (linearValue: number): number => {
@@ -72,18 +68,7 @@ const updateVolume = (linearValue: number) => {
             />
             <span class="volume-display">{{ Math.round(drumSound.getVolume()) }}dB</span>
         </div>
-        <div class="drum-control">
-            <select 
-                :id="`quantization-${drumSound.getId()}`" 
-                :value="drumSound.getQuantization()" 
-                @change="(event) => updateQuantization(Number((event.target as HTMLSelectElement).value))"
-                class="quantization-select"
-            >
-                <option value="4">Quarter Note</option>
-                <option value="8">Eighth Note</option>
-                <option value="16">Sixteenth Note</option>
-            </select>
-        </div>
+        
         <div class="drum-control">
             <button @click="hit">Hit</button>
         </div>
@@ -110,13 +95,7 @@ const updateVolume = (linearValue: number) => {
     gap: 10px;
 }
 
-.quantization-select {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background-color: white;
-    font-size: 14px;
-}
+
 
 label {
     font-weight: bold;
