@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Drum from './Drum.vue';
 import { DrumKitA } from '@/lib/DrumKit';
+import { DrumPattern } from '@/lib/DrumPattern';
 import { generatePattern } from '@/lib/DrumPatternGenerator';
 import * as Tone from 'tone';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
@@ -24,6 +25,7 @@ onUnmounted((): void => {
 const isPlaying = ref(false);
 var drumKit = DrumKitA;
 const currentParts = ref<Tone.Part[]>([]);
+var currentPattern: DrumPattern[] = [];
 
 function stopCurrentPattern(): void {
     // Stop all current parts
@@ -57,21 +59,23 @@ function playOrPause(): void {
     if (isPlaying.value) {
         stopCurrentPattern();
     } else {
-        const patterns = generatePattern(drumKit, 4);
-        console.log(`Pattern: ${patterns}`);
-        startPattern(patterns);
+        if( currentPattern.length === 0 ) {
+            currentPattern = generatePattern(drumKit, 4);
+        }
+        console.log(`Pattern: ${currentPattern}`);
+        startPattern(currentPattern);
     }
 }
 
 function generateNewPattern(): void {
     // Generate new pattern
-    const patterns = generatePattern(drumKit, 4);
-    console.log(`New Pattern: ${patterns}`);
+    currentPattern = generatePattern(drumKit, 4);
+    console.log(`New Pattern: ${currentPattern}`);
 
     // Stop current playback if playing
     if (isPlaying.value) {
         stopCurrentPattern();
-        startPattern(patterns);
+        startPattern(currentPattern);
     }
    
 }
