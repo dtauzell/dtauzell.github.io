@@ -26,6 +26,7 @@ onMounted(() => {
 
 // Function to update quantization for this drum sound
 const updateQuantization = (value: number) => {
+    console.log(`Updating quantization to ${value}`);
     props.drumSound.setQuantization(value);
 };
 
@@ -120,5 +121,30 @@ const updateVolume = (linearValue: number) => {
 label {
     font-weight: bold;
     min-width: 80px;
+}
+
+button {
+    padding: 8px 16px;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.1s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #e8e8e8;
+    border-color: #999;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+
+button:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+    background-color: #d8d8d8;
+    border-color: #666;
 }
 </style>

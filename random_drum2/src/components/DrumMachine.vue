@@ -23,29 +23,58 @@ onUnmounted((): void => {
 
 const isPlaying = ref(false);
 var drumKit = DrumKitA;
+const currentParts = ref<Tone.Part[]>([]);
+
+function stopCurrentPattern(): void {
+    // Stop all current parts
+    currentParts.value.forEach((part) => {
+        part.stop();
+        part.dispose();
+    });
+    currentParts.value = [];
+    
+    // Stop transport
+    Tone.getTransport().stop();
+    isPlaying.value = false;
+}
+
+function startPattern(patterns: any[]): void {
+    patterns.forEach(pattern => {
+        const part = new Tone.Part((time: number) => {
+            pattern.getDrum().hit(time);
+        }, pattern.getHits());
+        part.loop = true;
+        part.loopStart = 0;
+        part.start(0);
+        currentParts.value.push(part);
+    });
+
+    Tone.getTransport().start();
+    isPlaying.value = true;
+}
 
 function playOrPause(): void {
-
     if (isPlaying.value) {
-        isPlaying.value = false;
-        Tone.getTransport().stop()
-    }
-    else {
-        isPlaying.value = true;
-
+        stopCurrentPattern();
+    } else {
         const patterns = generatePattern(drumKit, 4);
-        console.log(`Pattern: ${patterns}`)
-        patterns.forEach(pattern => {
-            const part = new Tone.Part((time: number) => {
-                pattern.getDrum().hit(time);
-            }, pattern.getHits());
-            part.loop = true;
-            part.loopStart = 0;
-            part.start(0)
-        });
-
-        Tone.getTransport().start();
+        console.log(`Pattern: ${patterns}`);
+        startPattern(patterns);
     }
+}
+
+function generateNewPattern(): void {
+    // Stop current playback if playing
+    if (isPlaying.value) {
+        stopCurrentPattern();
+    }
+    
+    // Generate new pattern
+    const patterns = generatePattern(drumKit, 4);
+    console.log(`New Pattern: ${patterns}`);
+    
+    // Start playing the new pattern
+    startPattern(patterns);
 }
 
 const playPauseText = computed<string>(() => {
@@ -58,8 +87,8 @@ const playPauseText = computed<string>(() => {
 <template>
     <div class="control-panel">
         <div class="control-row">
-            <button class="btn-secondary">Generate</button>
-            <button class="btn-danger" v-on:click="playOrPause">{{ playPauseText }}</button>
+            <button @click="generateNewPattern">Generate</button>
+            <button @click="playOrPause">{{ playPauseText }}</button>
         </div>
         <div class="control-row">
             <Drum v-for="sound in DrumKitA.getSounds()" :drum-sound="sound" />
