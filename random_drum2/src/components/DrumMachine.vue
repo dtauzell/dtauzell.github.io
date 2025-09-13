@@ -64,17 +64,16 @@ function playOrPause(): void {
 }
 
 function generateNewPattern(): void {
-    // Stop current playback if playing
-    if (isPlaying.value) {
-        stopCurrentPattern();
-    }
-    
     // Generate new pattern
     const patterns = generatePattern(drumKit, 4);
     console.log(`New Pattern: ${patterns}`);
-    
-    // Start playing the new pattern
-    startPattern(patterns);
+
+    // Stop current playback if playing
+    if (isPlaying.value) {
+        stopCurrentPattern();
+        startPattern(patterns);
+    }
+   
 }
 
 const playPauseText = computed<string>(() => {
