@@ -14,16 +14,16 @@ export class DrumSound {
   private eighthNoteProbability: number;
   private sixteenthNoteProbability: number;
 
-  constructor(id: string, name: string, sampleUrl: string, volume: number = 0) {
+  constructor(id: string, name: string, sampleUrl: string, volume: number = 0, quarterNoteProbability: number = 0.5, eighthNoteProbability: number = 0.5, sixteenthNoteProbability: number = 0.5) {
     // Create a new Tone.Player with the drum sample
     this.id = id;
     this.name = name;
     this.volume = 0;
     this.quantization = 16;
     this.minimumVolume = -50;
-    this.quarterNoteProbability = 0.5;
-    this.eighthNoteProbability = 0.5;
-    this.sixteenthNoteProbability = 0.5;
+    this.quarterNoteProbability = quarterNoteProbability;
+    this.eighthNoteProbability = eighthNoteProbability;
+    this.sixteenthNoteProbability = sixteenthNoteProbability;
     this.player = new Tone.Player({
       url: sampleUrl,
       volume: 0,
