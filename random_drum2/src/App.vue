@@ -1,12 +1,21 @@
 <script setup lang="ts">
 import DrumMachine from './components/DrumMachine.vue'
+import PatternVisualizer from './components/PatternVisualizer.vue'
+import { ref } from 'vue'
+import { DrumKitA } from '@/lib/DrumKit';
 
+const pattern = ref<number[][]>([])
+const drumNames = DrumKitA.getSounds().map(s => s.getName())
+
+function onPatternGenerated(newPattern: number[][]) {
+  pattern.value = newPattern
+}
 </script>
 
 <template>
-
   <main>
-    <DrumMachine />
+    <DrumMachine @pattern-generated="onPatternGenerated" />
+    <PatternVisualizer :pattern="pattern" :drum-names="drumNames" />
   </main>
 </template>
 

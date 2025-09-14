@@ -3,8 +3,10 @@ import Drum from './Drum.vue';
 import { DrumKitA } from '@/lib/DrumKit';
 import { DrumPattern } from '@/lib/DrumPattern';
 import { generatePattern } from '@/lib/DrumPatternGenerator';
-import * as Tone from 'tone';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
+import * as Tone from 'tone';
+
+const emit = defineEmits(['pattern-generated']);
 
 const handleGlobalClick = async (): Promise<void> => {
     if (Tone.getContext().state === 'suspended') {
@@ -61,6 +63,7 @@ function playOrPause(): void {
     } else {
         if( currentPattern.length === 0 ) {
             currentPattern = generatePattern(drumKit, 4);
+            emit('pattern-generated', currentPattern.map(p => p.getHitsAsArray()));
         }
         console.log(`Pattern: ${currentPattern}`);
         startPattern(currentPattern);
@@ -70,6 +73,7 @@ function playOrPause(): void {
 function generateNewPattern(): void {
     // Generate new pattern
     currentPattern = generatePattern(drumKit, 4);
+    emit('pattern-generated', currentPattern.map(p => p.getHitsAsArray()));
     console.log(`New Pattern: ${currentPattern}`);
 
     // Stop current playback if playing
