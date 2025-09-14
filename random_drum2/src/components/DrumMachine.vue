@@ -118,7 +118,7 @@ const playPauseText = computed<string>(() => {
                 <button @click="playOrPause">{{ playPauseText }}</button>
             </div>
             <div class="control-row">
-                <Drum v-for="sound in DrumKitA.getSounds()" :drum-sound="sound" />
+                <Drum v-for="sound in DrumKitA.getSounds()" :drum-sound="sound" @probability-changed="generateNewPattern" />
             </div>
         </div>
         <div class="global-options">

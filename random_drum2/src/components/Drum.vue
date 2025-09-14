@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import Led from './Led.vue';
-import { ref, onMounted, watch, computed } from 'vue';
+import { ref, onMounted, watch, computed, defineEmits } from 'vue';
 import { DrumSound } from '@/lib/DrumSound';
 
 const props = defineProps<{
   drumSound: DrumSound;// array of objects
 }>();
+
+const emit = defineEmits(['probability-changed']);
 
 const led = ref<typeof Led | null>(null);
 const volumeDb = ref(props.drumSound.getVolume());
@@ -14,16 +16,27 @@ const quarterNoteProbability = ref(props.drumSound.getQuarterNoteProbability());
 const eighthNoteProbability = ref(props.drumSound.getEighthNoteProbability());
 const sixteenthNoteProbability = ref(props.drumSound.getSixteenthNoteProbability());
 
+let debounceTimer: number | undefined;
+const debouncedEmit = () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+        emit('probability-changed');
+    }, 50);
+};
+
 watch(quarterNoteProbability, (newValue) => {
     props.drumSound.setQuarterNoteProbability(newValue);
+    debouncedEmit();
 });
 
 watch(eighthNoteProbability, (newValue) => {
     props.drumSound.setEighthNoteProbability(newValue);
+    debouncedEmit();
 });
 
 watch(sixteenthNoteProbability, (newValue) => {
     props.drumSound.setSixteenthNoteProbability(newValue);
+    debouncedEmit();
 });
 
 const hit = () => {
