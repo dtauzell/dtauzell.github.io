@@ -9,7 +9,8 @@
           'beat',
           { active: beat === 1 },
           { 'measure-separator': (beatIndex % 16) === 0 && beatIndex > 0},
-          { 'quarter-note': (beatIndex % 4) === 0 }
+          { 'quarter-note': (beatIndex % 4) === 0 },
+          { 'current-quarter': Math.floor(beatIndex / 4) === currentQuarter && beatIndex % 4 === 0 }
         ]"
       ></div>
     </div>
@@ -19,7 +20,8 @@
 <script setup lang="ts">
 defineProps<{
   pattern: number[][],
-  drumNames: string[]
+  drumNames: string[],
+  currentQuarter: number
 }>()
 </script>
 
@@ -57,6 +59,10 @@ defineProps<{
 
 .beat.active.quarter-note {
   background-color: darkgreen;
+}
+
+.beat.quarter-note.current-quarter {
+  border-left: 1px solid red;
 }
 
 .measure-separator {

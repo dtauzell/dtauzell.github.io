@@ -6,16 +6,22 @@ import { DrumKitA } from '@/lib/DrumKit';
 
 const pattern = ref<number[][]>([])
 const drumNames = DrumKitA.getSounds().map(s => s.getName())
+const currentQuarter = ref(0)
 
 function onPatternGenerated(newPattern: number[][]) {
   pattern.value = newPattern
 }
+
+function onTick(tick: number) {
+  currentQuarter.value = tick
+}
+
 </script>
 
 <template>
   <main>
-    <DrumMachine @pattern-generated="onPatternGenerated" />
-    <PatternVisualizer :pattern="pattern" :drum-names="drumNames" />
+    <DrumMachine @pattern-generated="onPatternGenerated" @tick="onTick" />
+    <PatternVisualizer :pattern="pattern" :drum-names="drumNames" :current-quarter="currentQuarter" />
   </main>
 </template>
 

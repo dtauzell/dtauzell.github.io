@@ -6,7 +6,7 @@ import { generatePattern } from '@/lib/DrumPatternGenerator';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
 import * as Tone from 'tone';
 
-const emit = defineEmits(['pattern-generated']);
+const emit = defineEmits(['pattern-generated', 'tick']);
 
 const handleGlobalClick = async (): Promise<void> => {
     if (Tone.getContext().state === 'suspended') {
@@ -18,6 +18,15 @@ const handleGlobalClick = async (): Promise<void> => {
 
 onMounted((): void => {
     document.addEventListener('click', handleGlobalClick);
+    Tone.Transport.scheduleRepeat((time) => {
+        const position = Tone.Transport.position.toString();
+        const parts = position.split(':');
+        const measure = parseInt(parts[0]) % 4;
+        const quarter = parseInt(parts[1]);
+        const sixteenth = parseFloat(parts[2]);
+        const currentQuarter = measure * 4 + quarter;
+        emit('tick', currentQuarter);
+    }, '16n');
 });
 
 onUnmounted((): void => {
@@ -49,6 +58,7 @@ function startPattern(patterns: any[]): void {
         }, pattern.getHits());
         part.loop = true;
         part.loopStart = 0;
+        part.loopEnd = '4m';
         part.start(0);
         currentParts.value.push(part);
     });
