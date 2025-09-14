@@ -8,7 +8,8 @@
         :class="[
           'beat',
           { active: beat === 1 },
-          { 'measure-separator': (beatIndex % 16) === 0 && beatIndex > 0}
+          { 'measure-separator': (beatIndex % 16) === 0 && beatIndex > 0},
+          { 'quarter-note': (beatIndex % 4) === 0 }
         ]"
       ></div>
     </div>
@@ -52,6 +53,10 @@ defineProps<{
 
 .beat.active {
   background-color: lightgreen;
+}
+
+.beat.active.quarter-note {
+  background-color: darkgreen;
 }
 
 .measure-separator {
