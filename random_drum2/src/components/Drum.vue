@@ -47,6 +47,18 @@ const updateVolume = (linearValue: number) => {
     const logVolume = linearToLogVolume(linearValue);
     props.drumSound.setVolume(logVolume);
 };
+
+const updateQuarterNoteProbability = (value: number) => {
+    props.drumSound.setQuarterNoteProbability(value);
+};
+
+const updateEighthNoteProbability = (value: number) => {
+    props.drumSound.setEighthNoteProbability(value);
+};
+
+const updateSixteenthNoteProbability = (value: number) => {
+    props.drumSound.setSixteenthNoteProbability(value);
+};
 </script>
 
 <template>
@@ -67,6 +79,45 @@ const updateVolume = (linearValue: number) => {
                 class="w-full" 
             />
             <span class="volume-display">{{ Math.round(drumSound.getVolume()) }}dB</span>
+        </div>
+        <div class="drum-control">
+            1/4: <input 
+                type="range" 
+                :id="`quarter-note-probability-${drumSound.getId()}`" 
+                min="0" 
+                max="1" 
+                step="0.01"
+                :value="drumSound.getQuarterNoteProbability()" 
+                @input="(event) => updateQuarterNoteProbability(Number((event.target as HTMLInputElement).value))"
+                class="w-full" 
+            />
+            <span class="probability-display">{{ drumSound.getQuarterNoteProbability().toFixed(2) }}</span>
+        </div>
+        <div class="drum-control">
+            1/8: <input
+                type="range"
+                :id="`eighth-note-probability-${drumSound.getId()}`"
+                min="0"
+                max="1"
+                step="0.01"
+                :value="drumSound.getEighthNoteProbability()"
+                @input="(event) => updateEighthNoteProbability(Number((event.target as HTMLInputElement).value))"
+                class="w-full"
+            />
+            <span class="probability-display">{{ drumSound.getEighthNoteProbability().toFixed(2) }}</span>
+        </div>
+        <div class="drum-control">
+            1/16: <input
+                type="range"
+                :id="`sixteenth-note-probability-${drumSound.getId()}`"
+                min="0"
+                max="1"
+                step="0.01"
+                :value="drumSound.getSixteenthNoteProbability()"
+                @input="(event) => updateSixteenthNoteProbability(Number((event.target as HTMLInputElement).value))"
+                class="w-full"
+            />
+            <span class="probability-display">{{ drumSound.getSixteenthNoteProbability().toFixed(2) }}</span>
         </div>
         
         <div class="drum-control">

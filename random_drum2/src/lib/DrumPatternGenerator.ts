@@ -15,30 +15,14 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
         for (let measure = 0; measure < measures; measure++) {
             // Generate random hits for this drum
             for (let beat = 0; beat < quantization; beat++) {
-                // Different drums have different probability patterns for more musical results
-                let hitProbability = 0.1; // Base probability for random hits
+                let hitProbability = 0;
 
-                // Adjust probabilities based on drum type for more musical patterns
-                const drumName = sound.getName().toLowerCase();
-
-                if (drumName.includes('kick')) {
-                    // Kick drum: emphasize downbeats and common kick patterns
-                    if (beat % 4 === 0) hitProbability = 0.8; // Strong on quarter notes
-                    else if (beat % 8 === 0) hitProbability = 0.6; // Medium on 8th notes
-                    else hitProbability = 0.15; // Lower on other beats
-                } else if (drumName.includes('snare')) {
-                    // Snare drum: emphasize backbeats
-                    if (beat % 8 === 4) hitProbability = 0.9; // Strong on backbeats
-                    else if (beat % 4 === 2) hitProbability = 0.7; // Medium on 2 and 4
-                    else hitProbability = 0.2; // Lower on other beats
-                } else if (drumName.includes('hihat')) {
-                    // Hi-hat: more consistent pattern with some variation
-                    if (beat % 2 === 0) hitProbability = 0.7; // Strong on 8th notes
-                    else hitProbability = 0.4; // Medium on 16th notes
-                } else if (drumName.includes('tom')) {
-                    // Tom: occasional fills and accents
-                    if (beat % 16 === 0) hitProbability = 0.6; // Medium on downbeats
-                    else hitProbability = 0.1; // Lower on other beats
+                if (beat % 4 === 0) {
+                    hitProbability = sound.getQuarterNoteProbability();
+                } else if (beat % 2 === 0) {
+                    hitProbability = sound.getEighthNoteProbability();
+                } else {
+                    hitProbability = sound.getSixteenthNoteProbability();
                 }
 
                 // Add some randomness to avoid completely predictable patterns

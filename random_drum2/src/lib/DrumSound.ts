@@ -10,6 +10,9 @@ export class DrumSound {
   private quantization: number;
   private minimumVolume: number;
   private onPlayCallback?: () => void;
+  private quarterNoteProbability: number;
+  private eighthNoteProbability: number;
+  private sixteenthNoteProbability: number;
 
   constructor(id: string, name: string, sampleUrl: string, volume: number = 0) {
     // Create a new Tone.Player with the drum sample
@@ -18,6 +21,9 @@ export class DrumSound {
     this.volume = 0;
     this.quantization = 16;
     this.minimumVolume = -50;
+    this.quarterNoteProbability = 0.5;
+    this.eighthNoteProbability = 0.5;
+    this.sixteenthNoteProbability = 0.5;
     this.player = new Tone.Player({
       url: sampleUrl,
       volume: 0,
@@ -41,6 +47,30 @@ export class DrumSound {
 
   public getQuantization(): number {
     return this.quantization;
+  }
+
+  public getQuarterNoteProbability(): number {
+    return this.quarterNoteProbability;
+  }
+
+  public setQuarterNoteProbability(probability: number): void {
+    this.quarterNoteProbability = probability;
+  }
+
+  public getEighthNoteProbability(): number {
+    return this.eighthNoteProbability;
+  }
+
+  public setEighthNoteProbability(probability: number): void {
+    this.eighthNoteProbability = probability;
+  }
+
+  public getSixteenthNoteProbability(): number {
+    return this.sixteenthNoteProbability;
+  }
+
+  public setSixteenthNoteProbability(probability: number): void {
+    this.sixteenthNoteProbability = probability;
   }
 
   public getMinimumVolume(): number {
