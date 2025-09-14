@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Led from './Led.vue';
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, watch } from 'vue';
 import { DrumSound } from '@/lib/DrumSound';
 
 const props = defineProps<{
@@ -8,6 +8,22 @@ const props = defineProps<{
 }>();
 
 const led = ref<typeof Led | null>(null);
+
+const quarterNoteProbability = ref(props.drumSound.getQuarterNoteProbability());
+const eighthNoteProbability = ref(props.drumSound.getEighthNoteProbability());
+const sixteenthNoteProbability = ref(props.drumSound.getSixteenthNoteProbability());
+
+watch(quarterNoteProbability, (newValue) => {
+    props.drumSound.setQuarterNoteProbability(newValue);
+});
+
+watch(eighthNoteProbability, (newValue) => {
+    props.drumSound.setEighthNoteProbability(newValue);
+});
+
+watch(sixteenthNoteProbability, (newValue) => {
+    props.drumSound.setSixteenthNoteProbability(newValue);
+});
 
 const hit = () => {
     led.value?.blink(50);
@@ -48,17 +64,7 @@ const updateVolume = (linearValue: number) => {
     props.drumSound.setVolume(logVolume);
 };
 
-const updateQuarterNoteProbability = (value: number) => {
-    props.drumSound.setQuarterNoteProbability(value);
-};
 
-const updateEighthNoteProbability = (value: number) => {
-    props.drumSound.setEighthNoteProbability(value);
-};
-
-const updateSixteenthNoteProbability = (value: number) => {
-    props.drumSound.setSixteenthNoteProbability(value);
-};
 </script>
 
 <template>
@@ -87,11 +93,10 @@ const updateSixteenthNoteProbability = (value: number) => {
                 min="0" 
                 max="1" 
                 step="0.01"
-                :value="drumSound.getQuarterNoteProbability()" 
-                @input="(event) => updateQuarterNoteProbability(Number((event.target as HTMLInputElement).value))"
+                v-model.number="quarterNoteProbability"
                 class="w-full" 
             />
-            <span class="probability-display">{{ drumSound.getQuarterNoteProbability().toFixed(2) }}</span>
+            <span class="probability-display">{{ Math.round(quarterNoteProbability * 100) }}%</span>
         </div>
         <div class="drum-control">
             1/8: <input
@@ -100,11 +105,10 @@ const updateSixteenthNoteProbability = (value: number) => {
                 min="0"
                 max="1"
                 step="0.01"
-                :value="drumSound.getEighthNoteProbability()"
-                @input="(event) => updateEighthNoteProbability(Number((event.target as HTMLInputElement).value))"
+                v-model.number="eighthNoteProbability"
                 class="w-full"
             />
-            <span class="probability-display">{{ drumSound.getEighthNoteProbability().toFixed(2) }}</span>
+            <span class="probability-display">{{ Math.round(eighthNoteProbability * 100) }}%</span>
         </div>
         <div class="drum-control">
             1/16: <input
@@ -113,11 +117,10 @@ const updateSixteenthNoteProbability = (value: number) => {
                 min="0"
                 max="1"
                 step="0.01"
-                :value="drumSound.getSixteenthNoteProbability()"
-                @input="(event) => updateSixteenthNoteProbability(Number((event.target as HTMLInputElement).value))"
+                v-model.number="sixteenthNoteProbability"
                 class="w-full"
             />
-            <span class="probability-display">{{ drumSound.getSixteenthNoteProbability().toFixed(2) }}</span>
+            <span class="probability-display">{{ Math.round(sixteenthNoteProbability * 100) }}%</span>
         </div>
         
         <div class="drum-control">
