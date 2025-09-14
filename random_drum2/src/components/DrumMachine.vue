@@ -4,10 +4,15 @@ import { DrumKitA } from '@/lib/DrumKit';
 import { DrumHit } from '@/lib/DrumHit';
 import { DrumPattern } from '@/lib/DrumPattern';
 import { generatePattern } from '@/lib/DrumPatternGenerator';
-import { computed, onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import * as Tone from 'tone';
 
 const emit = defineEmits(['pattern-generated', 'tick']);
+
+const tempo = ref(120);
+watch(tempo, (newTempo) => {
+    Tone.Transport.bpm.value = newTempo;
+});
 
 const handleGlobalClick = async (): Promise<void> => {
     if (Tone.getContext().state === 'suspended') {
@@ -18,8 +23,9 @@ const handleGlobalClick = async (): Promise<void> => {
 };
 
 onMounted((): void => {
+    Tone.Transport.bpm.value = tempo.value;
     document.addEventListener('click', handleGlobalClick);
-    Tone.getTransport().scheduleRepeat((time) => {
+    Tone.Transport.scheduleRepeat((time) => {
         const position = Tone.Transport.position.toString();
         const parts = position.split(':');
         const measure = parseInt(parts[0]) % 4;
@@ -105,15 +111,40 @@ const playPauseText = computed<string>(() => {
 </script>
 
 <template>
-    <div class="control-panel">
-        <div class="control-row">
-            <button @click="generateNewPattern">Generate</button>
-            <button @click="playOrPause">{{ playPauseText }}</button>
+    <div class="drum-machine-container">
+        <div class="drum-controls">
+            <div class="control-row">
+                <button @click="generateNewPattern">Generate</button>
+                <button @click="playOrPause">{{ playPauseText }}</button>
+            </div>
+            <div class="control-row">
+                <Drum v-for="sound in DrumKitA.getSounds()" :drum-sound="sound" />
+            </div>
         </div>
-        <div class="control-row">
-            <Drum v-for="sound in DrumKitA.getSounds()" :drum-sound="sound" />
+        <div class="global-options">
+            <h3>Global Options</h3>
+            <div class="control-row">
+                <label for="tempo">Tempo: {{ tempo }}</label>
+                <input 
+                    type="range" 
+                    id="tempo" 
+                    min="40" 
+                    max="250" 
+                    v-model.number="tempo" 
+                />
+            </div>
         </div>
     </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.drum-machine-container {
+    display: flex;
+    gap: 20px;
+}
+.global-options {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+</style>
