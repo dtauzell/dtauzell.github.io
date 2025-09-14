@@ -1,9 +1,9 @@
 <template>
   <div class="pattern-visualizer">
-    <div v-for="(row, rowIndex) in pattern" :key="rowIndex" class="drum-row">
-      <div class="drum-name">{{ drumNames[rowIndex] }}</div>
+    <div v-for="(drumPattern, rowIndex) in patterns" :key="rowIndex" class="drum-row">
+      <div class="drum-name">{{ drumPattern.getDrum().getName() }}</div>
       <div
-        v-for="(beat, beatIndex) in row"
+        v-for="(beat, beatIndex) in drumPattern.getHitsAsArray()"
         :key="beatIndex"
         :class="[
           'beat',
@@ -18,9 +18,10 @@
 </template>
 
 <script setup lang="ts">
+import type { DrumPattern } from '@/lib/DrumPattern';
+
 defineProps<{
-  pattern: number[][],
-  drumNames: string[],
+  patterns: DrumPattern[],
   currentQuarter: number
 }>()
 </script>

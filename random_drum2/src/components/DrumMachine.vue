@@ -76,7 +76,7 @@ function playOrPause(): void {
     } else {
         if( currentPattern.length === 0 ) {
             currentPattern = generatePattern(drumKit, 4);
-            emit('pattern-generated', currentPattern.map(p => p.getHitsAsArray()));
+            emit('pattern-generated', currentPattern);
         }
         console.log(`Pattern: ${currentPattern}`);
         startPattern(currentPattern);
@@ -86,7 +86,7 @@ function playOrPause(): void {
 function generateNewPattern(): void {
     // Generate new pattern
     currentPattern = generatePattern(drumKit, 4);
-    emit('pattern-generated', currentPattern.map(p => p.getHitsAsArray()));
+    emit('pattern-generated', currentPattern);
     console.log(`New Pattern: ${currentPattern}`);
 
     // Stop current playback if playing

@@ -2,14 +2,13 @@
 import DrumMachine from './components/DrumMachine.vue'
 import PatternVisualizer from './components/PatternVisualizer.vue'
 import { ref } from 'vue'
-import { DrumKitA } from '@/lib/DrumKit';
+import type { DrumPattern } from '@/lib/DrumPattern';
 
-const pattern = ref<number[][]>([])
-const drumNames = DrumKitA.getSounds().map(s => s.getName())
+const patterns = ref<DrumPattern[]>([])
 const currentQuarter = ref(0)
 
-function onPatternGenerated(newPattern: number[][]) {
-  pattern.value = newPattern
+function onPatternGenerated(newPattern: DrumPattern[]) {
+  patterns.value = newPattern
 }
 
 function onTick(tick: number) {
@@ -21,7 +20,7 @@ function onTick(tick: number) {
 <template>
   <main>
     <DrumMachine @pattern-generated="onPatternGenerated" @tick="onTick" />
-    <PatternVisualizer :pattern="pattern" :drum-names="drumNames" :current-quarter="currentQuarter" />
+    <PatternVisualizer :patterns="patterns" :current-quarter="currentQuarter" />
   </main>
 </template>
 
