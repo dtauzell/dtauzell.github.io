@@ -18,7 +18,7 @@ export class DrumSound {
     // Create a new Tone.Player with the drum sample
     this.id = id;
     this.name = name;
-    this.volume = 0;
+    this.volume = volume;
     this.quantization = 16;
     this.minimumVolume = -50;
     this.quarterNoteProbability = quarterNoteProbability;
@@ -26,7 +26,7 @@ export class DrumSound {
     this.sixteenthNoteProbability = sixteenthNoteProbability;
     this.player = new Tone.Player({
       url: sampleUrl,
-      volume: 0,
+      volume: this.volume,
       autostart: false,
       loop: false,
       onload: () => {

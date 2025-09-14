@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Led from './Led.vue';
-import { ref, onMounted, watch } from 'vue';
+import { ref, onMounted, watch, computed } from 'vue';
 import { DrumSound } from '@/lib/DrumSound';
 
 const props = defineProps<{
@@ -8,6 +8,7 @@ const props = defineProps<{
 }>();
 
 const led = ref<typeof Led | null>(null);
+const volumeDb = ref(props.drumSound.getVolume());
 
 const quarterNoteProbability = ref(props.drumSound.getQuarterNoteProbability());
 const eighthNoteProbability = ref(props.drumSound.getEighthNoteProbability());
@@ -62,7 +63,13 @@ const logToLinearVolume = (logVolume: number): number => {
 const updateVolume = (linearValue: number) => {
     const logVolume = linearToLogVolume(linearValue);
     props.drumSound.setVolume(logVolume);
+    volumeDb.value = logVolume;
 };
+
+const volume = computed({
+    get: () => logToLinearVolume(props.drumSound.getVolume()),
+    set: (newValue) => updateVolume(newValue)
+});
 
 
 </script>
@@ -80,11 +87,10 @@ const updateVolume = (linearValue: number) => {
                 min="0" 
                 max="1" 
                 step="0.01"
-                :value="logToLinearVolume(drumSound.getVolume())" 
-                @input="(event) => updateVolume(Number((event.target as HTMLInputElement).value))"
+                v-model.number="volume"
                 class="w-full" 
             />
-            <span class="volume-display">{{ Math.round(drumSound.getVolume()) }}dB</span>
+            <span class="volume-display">{{ Math.round(volumeDb) }}dB</span>
         </div>
         <div class="drum-control">
             1/4: <input 
