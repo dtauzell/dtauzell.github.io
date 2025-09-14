@@ -55,7 +55,7 @@ function startPattern(patterns: any[]): void {
     patterns.forEach(pattern => {
         const part = new Tone.Part((time: number) => {
             pattern.getDrum().hit(time);
-        }, pattern.getHits());
+        }, pattern.getHits(), { humanize: true });
         part.loop = true;
         part.loopStart = 0;
         part.loopEnd = '4m';
