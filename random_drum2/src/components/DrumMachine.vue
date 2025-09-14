@@ -10,8 +10,12 @@ import * as Tone from 'tone';
 const emit = defineEmits(['pattern-generated', 'tick']);
 
 const tempo = ref(120);
+let tempoDebounceTimer: number | undefined;
 watch(tempo, (newTempo) => {
-    Tone.Transport.bpm.value = newTempo;
+    clearTimeout(tempoDebounceTimer);
+    tempoDebounceTimer = setTimeout(() => {
+        Tone.Transport.bpm.value = newTempo;
+    }, 50);
 });
 
 const handleGlobalClick = async (): Promise<void> => {
@@ -24,6 +28,7 @@ const handleGlobalClick = async (): Promise<void> => {
 
 onMounted((): void => {
     Tone.Transport.bpm.value = tempo.value;
+    generateNewPattern();
     document.addEventListener('click', handleGlobalClick);
     Tone.Transport.scheduleRepeat((time) => {
         const position = Tone.Transport.position.toString();
