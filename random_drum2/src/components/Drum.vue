@@ -144,7 +144,7 @@ const volume = computed({
     padding: 10px 0;
     border: 1px solid #ccc;
     border-radius: 2px;
-    width: 100%;
+    width: 250px;
     max-width: 600px;
 }
 
