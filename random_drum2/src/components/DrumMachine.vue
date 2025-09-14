@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Drum from './Drum.vue';
 import { DrumKitA } from '@/lib/DrumKit';
+import { DrumHit } from '@/lib/DrumHit';
 import { DrumPattern } from '@/lib/DrumPattern';
 import { generatePattern } from '@/lib/DrumPatternGenerator';
 import { computed, onMounted, onUnmounted, ref } from 'vue';
@@ -18,7 +19,7 @@ const handleGlobalClick = async (): Promise<void> => {
 
 onMounted((): void => {
     document.addEventListener('click', handleGlobalClick);
-    Tone.Transport.scheduleRepeat((time) => {
+    Tone.getTransport().scheduleRepeat((time) => {
         const position = Tone.Transport.position.toString();
         const parts = position.split(':');
         const measure = parseInt(parts[0]) % 4;
@@ -51,11 +52,13 @@ function stopCurrentPattern(): void {
     isPlaying.value = false;
 }
 
-function startPattern(patterns: any[]): void {
+function startPattern(patterns: DrumPattern[]): void {
     patterns.forEach(pattern => {
-        const part = new Tone.Part((time: number) => {
-            pattern.getDrum().hit(time);
-        }, pattern.getHits(), { humanize: true });
+        const part = new Tone.Part((time: number, drumHit: DrumHit) => {
+            if( drumHit.isHit() ) {
+                drumHit.sound.hit(time);
+            }
+        }, pattern.getHits());
         part.loop = true;
         part.loopStart = 0;
         part.loopEnd = '4m';

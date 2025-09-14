@@ -1,5 +1,7 @@
 import { DrumPattern } from '@/lib/DrumPattern';
 import { DrumKit } from '@/lib/DrumKit';
+import { DrumHit } from '@/lib/DrumHit';
+import { NoteType } from './NoteType';
 
 export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern[] {
     const patterns: DrumPattern[] = [];
@@ -15,30 +17,19 @@ export function generatePattern(kit: DrumKit, measures: number = 4): DrumPattern
         for (let measure = 0; measure < measures; measure++) {
             // Generate random hits for this drum
             for (let beat = 0; beat < quantization; beat++) {
+                let noteType = NoteType.SIXTEENTH;
                 let hitProbability = 0;
 
                 if (beat % 4 === 0) {
-                    hitProbability = sound.getQuarterNoteProbability();
+                    noteType = NoteType.QUARTER;
                 } else if (beat % 2 === 0) {
-                    hitProbability = sound.getEighthNoteProbability();
+                    noteType = NoteType.EIGHTH;
                 } else {
-                    hitProbability = sound.getSixteenthNoteProbability();
+                    noteType = NoteType.SIXTEENTH;
                 }
 
-                // Add some randomness to avoid completely predictable patterns
-                hitProbability += (Math.random() - 0.5) * 0.2;
-                hitProbability = Math.max(0, Math.min(1, hitProbability)); // Clamp between 0 and 1
-
-                // Determine if we should add a hit at this beat
-                if (Math.random() < hitProbability) {
-                    // Create a hit specification with beat position and velocity
-                    const velocity = 0.5 + Math.random() * 0.5; // Random velocity between 0.5 and 1.0
-                    const spec = timeSpec(measure, beat, quantization);
-
-                    console.log(`measure ${measure}, beat: ${beat}, spec: ${spec}`)
-
-                    pattern.addHit(spec);
-                }
+                const spec = timeSpec(measure, beat, quantization);
+                pattern.addHit(new DrumHit(spec, sound, noteType, Math.random()));
             }
         }
 
