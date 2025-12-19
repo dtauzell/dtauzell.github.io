@@ -2,7 +2,8 @@
 import Layout from "../layouts/Layout.astro";
 import resumeData from "../data/resume.json";
 
-const { name, location, social, employment, education, skills } = resumeData;
+const { name, info, location, social, employment, education, skills } =
+    resumeData;
 ---
 
 <Layout title={`Resume - ${name}`}>
@@ -23,7 +24,10 @@ const { name, location, social, employment, education, skills } = resumeData;
         <div class="resume-paper">
             <!-- Header -->
             <header class="resume-header">
-                <h1>{name}</h1>
+                <div class="header-main">
+                    <h1>{name}</h1>
+                    <p class="professional-tagline">{info.label}</p>
+                </div>
                 <div class="contact-info">
                     <span>
                         <svg
@@ -69,6 +73,12 @@ const { name, location, social, employment, education, skills } = resumeData;
                     }
                 </div>
             </header>
+
+            <!-- Professional Summary Section -->
+            <section class="professional-summary">
+                <h3>Professional Summary</h3>
+                <p>{info.summary}</p>
+            </section>
 
             <div class="resume-grid">
                 <!-- Main Content (Left) -->
@@ -202,7 +212,37 @@ const { name, location, social, employment, education, skills } = resumeData;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .professional-tagline {
+        font-size: 1.25rem;
+        color: var(--accent-primary);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+
+    .professional-summary {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .professional-summary h3 {
+        color: var(--accent-secondary);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+    }
+
+    .professional-summary p {
+        font-size: 1.15rem;
+        line-height: 1.7;
+        color: var(--text-main);
+        max-width: 800px;
     }
 
     .contact-info {
