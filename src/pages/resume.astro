@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import resumeData from '../data/resume.json';
+---
+
+<Layout title={`Resume - ${resumeData.name}`}>
+  <div class="resume-container">
+    <h1 class="cover-heading">Resume</h1>
+    
+    <div class="resume-actions">
+        <a href="/resume/resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
+            Download PDF
+        </a>
+    </div>
+
+    <!-- Header / Contact -->
+    <div class="resume-section">
+        <h2>{resumeData.name}</h2>
+        <p class="lead" style="font-size: 1.1rem; margin-bottom: 1rem;">
+            {resumeData.location.city}, {resumeData.location.region} | 
+            {resumeData.social.map((s, i) => (
+                <span>
+                    {i > 0 && " | "}
+                    <a href={s.url} target="_blank">{s.network}</a>
+                </span>
+            ))}
+        </p>
+    </div>
+
+    <!-- Experience -->
+    <div class="resume-section text-left">
+        <h3>Experience</h3>
+        {resumeData.employment.history.map((job) => (
+            <div class="resume-item">
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <h4>{job.position}</h4>
+                    <span class="date">{job.start} — {job.end || 'Present'}</span>
+                </div>
+                <h5 class="company">
+                    {job.url ? <a href={job.url} target="_blank">{job.employer}</a> : job.employer}
+                </h5>
+                <p class="summary">{job.summary}</p>
+                {job.highlights && job.highlights.length > 0 && (
+                    <ul class="highlights">
+                        {job.highlights.map((highlight) => (
+                            <li>{highlight}</li>
+                        ))}
+                    </ul>
+                )}
+            </div>
+        ))}
+    </div>
+
+    <!-- Education -->
+    <div class="resume-section text-left">
+        <h3>Education</h3>
+        {resumeData.education.history.map((edu) => (
+            <div class="resume-item">
+                <div class="d-flex justify-content-between align-items-baseline">
+                    <h4>{edu.institution}</h4>
+                    <span class="date">{edu.start} — {edu.end}</span>
+                </div>
+                <p>{edu.studyType} - {edu.area}</p>
+            </div>
+        ))}
+    </div>
+
+    <!-- Skills -->
+    <div class="resume-section text-left">
+        <h3>Skills</h3>
+        <div class="skills-grid">
+            {resumeData.skills.sets.map((skillSet) => (
+                <div class="skill-category">
+                    <h4>{skillSet.name}</h4>
+                    <p>{skillSet.skills.join(', ')}</p>
+                </div>
+            ))}
+        </div>
+    </div>
+
+  </div>
+</Layout>
+
+<style>
+    .resume-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding-bottom: 3rem;
+    }
+
+    .resume-actions {
+        margin-bottom: 2rem;
+    }
+
+    .resume-section {
+        background: rgba(255, 250, 240, 0.9);
+        backdrop-filter: blur(10px);
+        border-radius: 15px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 8px 25px rgba(47, 79, 47, 0.15);
+        border: 2px solid rgba(139, 69, 19, 0.3);
+    }
+
+    .resume-section h2 {
+        color: #2d4a3e;
+        margin-bottom: 0.5rem;
+    }
+
+    .resume-section h3 {
+        color: #8b4513;
+        border-bottom: 2px solid rgba(139, 69, 19, 0.2);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+        font-family: 'Merriweather', serif;
+    }
+
+    .resume-item {
+        margin-bottom: 2rem;
+    }
+
+    .resume-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .resume-item h4 {
+        color: #2d4a3e;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .company {
+        color: #556b2f;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+
+    .date {
+        color: #666;
+        font-style: italic;
+        font-family: serif;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .d-flex {
+        display: flex;
+    }
+    
+    .justify-content-between {
+        justify-content: space-between;
+    }
+
+    .align-items-baseline {
+        align-items: baseline;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .skill-category h4 {
+        font-size: 1.1rem;
+        color: #556b2f;
+        margin-bottom: 0.5rem;
+    }
+    
+    .highlights {
+        margin-top: 0.5rem;
+        padding-left: 1.2rem;
+        color: #2d4a3e;
+    }
+    
+    .highlights li {
+        margin-bottom: 0.25rem;
+    }
+    
+    a {
+        color: #8b4513;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 600px) {
+        .d-flex {
+            flex-direction: column;
+        }
+        .date {
+            margin-bottom: 0.5rem;
+        }
+    }
+</style>
