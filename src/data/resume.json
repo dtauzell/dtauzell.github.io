@@ -1,0 +1,125 @@
+{
+  "name": "Dave Tauzell",
+  "info": {},
+  "meta": {
+    "format": "FRESH@0.6.0",
+    "version": "0.1.0"
+  },
+  "location": {
+    "city": "Waukesha",
+    "region": "Wisconsin",
+    "country": "US",
+    "code": "53189",
+    "address": "W239S4735 Merlin Ln"
+  },
+  "employment": {
+    "history": [
+      {
+        "position": "Senior Software Engineer",
+        "employer": "Surescripts",
+        "summary": "Lead the Infrastructure Team in designing, coding, and maintaining high-volume, highly available healthcare systems critical to patient care.",
+        "current": true,
+        "start": "2002-01-01",
+        "end": "",
+        "url": "http://surescripts.com",
+        "keywords": [],
+        "highlights": [
+          "Orchestrate comprehensive security reviews to ensure HIPAA compliance and system integrity.",
+          "Manage and optimize CI/CD pipelines using Jenkins, significantly improving deployment reliability.",
+          "Architect and maintain specialized internal tooling to empower support teams and reduce resolution times."
+        ]
+      },
+      {
+        "position": "Software Developer",
+        "employer": "Health Nexis",
+        "summary": "Engineered robust systems for translating complex EDI messages, ensuring data integrity across healthcare exchanges.",
+        "start": "2001-06",
+        "end": "2002-01",
+        "url": "",
+        "keywords": [],
+        "highlights": []
+      },
+      {
+        "position": "Software Developer",
+        "employer": "Qwest Communications",
+        "summary": "Developed full-stack in-house web applications to enhance support staff efficiency.",
+        "start": "1996-01",
+        "end": "2001-06",
+        "url": "",
+        "keywords": [],
+        "highlights": [
+          "Designed and implemented web services to seamlessly integrate legacy Smalltalk and Perl environments.",
+          "Administered and maintained a cluster of Linux servers, ensuring uptime and performance."
+        ]
+      }
+    ]
+  },
+  "education": {
+    "level": "",
+    "history": [
+      {
+        "institution": "University of Minnesota",
+        "start": "1993",
+        "end": "1997",
+        "grade": "",
+        "curriculum": [],
+        "summary": "",
+        "area": "Computer Science, Mathematics",
+        "studyType": "Bachelor"
+      }
+    ]
+  },
+  "skills": {
+    "sets": [
+      {
+        "name": "Backend Development",
+        "level": "",
+        "skills": [
+          "Java",
+          "C#",
+          "Perl",
+          "Python",
+          "SQL",
+          "Some Hadoop",
+          "Queuing Systems",
+          "Oracle"
+        ]
+      },
+      {
+        "name": "Web Development",
+        "level": "",
+        "skills": [
+          "HTML",
+          "CSS",
+          "javascript"
+        ]
+      },
+      {
+        "name": "Healthcare",
+        "level": "",
+        "skills": [
+          "X12",
+          "NCPDP",
+          "HL7"
+        ]
+      }
+    ]
+  },
+  "social": [
+    {
+      "label": "LinkedIn",
+      "network": "LinkedIn",
+      "url": "https://www.linkedin.com/in/dtauzell",
+      "user": ""
+    },
+    {
+      "label": "stackoverflow",
+      "network": "stackoverflow",
+      "url": "http://stackoverflow.com/users/3095/dave",
+      "user": "3095"
+    }
+  ],
+  "interests": [],
+  "testimonials": 0,
+  "languages": []
+}
