@@ -1,0 +1,70 @@
+---
+import '../styles/modern.css';
+
+interface Props {
+	title: string;
+}
+
+const { title } = Astro.props;
+
+const navItems = [
+    { href: '/', label: 'Home' },
+    { href: '/music', label: 'Music' },
+    { href: '/contact', label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname;
+// Helper to determine if a link is active.
+// Note: when building statically, pathname might vary (trailing slash etc).
+// We'll do a simple normalize comparison.
+const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+const normalizedCurrent = normalize(currentPath);
+
+const isActive = (href: string) => {
+    const normalizedHref = normalize(href);
+    if (normalizedHref === '/') {
+        return normalizedCurrent === '/';
+    }
+    return normalizedCurrent.startsWith(normalizedHref);
+}
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Dave Tauzell - Musician and Composer">
+    <meta name="author" content="Dave Tauzell">
+    <title>{title}</title>
+  </head>
+  <body class="text-center">
+
+    <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+      <header class="masthead mb-auto">
+        <h3 class="masthead-brand">Dave Tauzell</h3>
+        <nav class="nav nav-masthead">
+            {navItems.map(item => (
+                <a 
+                    class:list={["nav-link", { active: isActive(item.href) }]} 
+                    href={item.href}
+                >
+                    {item.label}
+                </a>
+            ))}
+        </nav>
+      </header>
+
+      <main role="main" class="inner cover">
+        <slot />
+      </main>
+
+      <footer class="mastfoot mt-auto">
+        <div class="inner">
+          <p>&copy; 2024 Dave Tauzell. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+  </body>
+</html>
