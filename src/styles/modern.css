@@ -260,6 +260,68 @@ body {
   flex-grow: 1;
 }
 
+.streaming-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+
+.streaming-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.streaming-link svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.streaming-link:hover {
+  background: rgba(52, 211, 153, 0.15);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.streaming-link.spotify:hover {
+  color: #1db954;
+  border-color: #1db954;
+}
+
+.streaming-link.apple:hover {
+  color: #fb5770;
+  border-color: #fb5770;
+}
+
+.streaming-link.amazon:hover {
+  color: #ff9900;
+  border-color: #ff9900;
+}
+
+.streaming-link.bandcamp:hover {
+  color: #629aa9;
+  border-color: #629aa9;
+}
+
+.streaming-link.deezer:hover {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+
 /* Footer */
 .mastfoot {
   margin-top: auto;
