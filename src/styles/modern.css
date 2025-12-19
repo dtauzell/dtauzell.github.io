@@ -54,8 +54,8 @@ body {
 
 /* Header / Masthead */
 .masthead {
-  padding: 3rem 2rem;
-  margin-bottom: 3rem;
+  padding: 2rem 2rem;
+  margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -197,10 +197,10 @@ body {
 /* Album Grid */
 .album-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
   width: 100%;
-  margin-top: 4rem;
+  margin-top: 2rem;
 }
 
 /* Glassmorphism Card Style - Organic */
@@ -210,13 +210,16 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-organic);
-  padding: 1.5rem;
-  text-align: left;
+  padding: 1.25rem;
+  text-align: center;
+  /* Center content */
   transition: all 0.4s ease;
   overflow: hidden;
   position: relative;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  /* Center items horizontally */
 }
 
 /* Subtle inner glow on hover */
@@ -224,16 +227,18 @@ body {
   transform: translateY(-8px);
   border-color: rgba(52, 211, 153, 0.3);
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.6);
-  background: rgba(20, 83, 45, 0.6);
+  background: rgba(30, 41, 59, 0.8);
 }
 
 .album-cover {
   width: 100%;
+  max-width: 180px;
+  /* Specific smaller size */
   aspect-ratio: 1;
   object-fit: cover;
-  border-radius: 18px;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 14px;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
