@@ -54,13 +54,31 @@ body {
 
 /* Header / Masthead */
 .masthead {
-  padding: 2rem 0;
+  padding: 3rem 2rem;
   margin-bottom: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid var(--glass-border);
   position: relative;
+  /* Forest background with dark overlay */
+  background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('/images/navbar_forest.png');
+  background-size: cover;
+  background-position: center 40%;
+  border-radius: var(--radius-organic);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.masthead::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent, rgba(15, 23, 42, 0.4));
+  pointer-events: none;
 }
 
 .masthead-brand {
