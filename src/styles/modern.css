@@ -311,6 +311,51 @@ body {
   transition: transform 0.4s ease;
 }
 
+/* Snow Animation */
+#snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10000;
+  /* Extremely high to stay above glass effects */
+  overflow: hidden;
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  /* Start slightly off-screen */
+  background: white;
+  border-radius: 50%;
+  opacity: 0.9;
+  filter: blur(0.3px);
+  pointer-events: none;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+}
+
+@keyframes snow-fall-fade {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 0.9;
+  }
+
+  90% {
+    opacity: 0.9;
+  }
+
+  100% {
+    transform: translateY(600px) translateX(var(--drift));
+    opacity: 0;
+  }
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
   .masthead {

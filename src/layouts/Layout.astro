@@ -49,6 +49,7 @@ const isActive = (href: string) => {
     />
   </head>
   <body class="text-center">
+    <div id="snow-container"></div>
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <h3 class="masthead-brand">Dave Tauzell</h3>
@@ -65,6 +66,47 @@ const isActive = (href: string) => {
           }
         </nav>
       </header>
+
+      <script is:inline>
+        function createSnowflake() {
+          // 1. Don't show snow on resume page
+          if (window.location.pathname.includes("/resume")) return;
+
+          const container = document.getElementById("snow-container");
+          const header = document.querySelector(".masthead");
+          if (!container || !header) return;
+
+          const snowflake = document.createElement("div");
+          snowflake.classList.add("snowflake");
+
+          const rect = header.getBoundingClientRect();
+
+          // Random properties
+          const size = Math.random() * 4 + 3 + "px";
+          const left = rect.left + Math.random() * rect.width + "px";
+          const duration = Math.random() * 4 + 4 + "s";
+          const drift = (Math.random() - 0.5) * 80 + "px";
+
+          snowflake.style.width = size;
+          snowflake.style.height = size;
+          snowflake.style.left = left;
+          snowflake.style.top = rect.bottom + "px"; // Start exactly at navbar bottom
+          snowflake.style.animation = `snow-fall-fade ${duration} linear forwards`;
+          snowflake.style.setProperty("--drift", drift);
+
+          container.appendChild(snowflake);
+
+          setTimeout(
+            () => {
+              snowflake.remove();
+            },
+            parseFloat(duration) * 1000,
+          );
+        }
+
+        // Spawn a bit faster for better effect
+        setInterval(createSnowflake, 300);
+      </script>
 
       <main role="main" class="inner cover">
         <slot />
