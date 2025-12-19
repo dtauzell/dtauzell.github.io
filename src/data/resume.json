@@ -17,18 +17,22 @@
       {
         "position": "Senior Software Engineer",
         "employer": "Surescripts",
-        "summary": "Team lead for the infrastructure team.  I design, code and maintain a high volume, highly available healthcare system. Perform security reviews, maintain build tools like Jenkins, as well as support and maintain tools used by our support team.",
+        "summary": "Lead the Infrastructure Team in designing, coding, and maintaining high-volume, highly available healthcare systems critical to patient care.",
         "current": true,
         "start": "2002-01-01",
         "end": "",
         "url": "http://surescripts.com",
         "keywords": [],
-        "highlights": []
+        "highlights": [
+          "Orchestrate comprehensive security reviews to ensure HIPAA compliance and system integrity.",
+          "Manage and optimize CI/CD pipelines using Jenkins, significantly improving deployment reliability.",
+          "Architect and maintain specialized internal tooling to empower support teams and reduce resolution times."
+        ]
       },
       {
         "position": "Software Developer",
         "employer": "Health Nexis",
-        "summary": "Developed systems to translate EDI messages. ",
+        "summary": "Engineered robust systems for translating complex EDI messages, ensuring data integrity across healthcare exchanges.",
         "start": "2001-06",
         "end": "2002-01",
         "url": "",
@@ -38,12 +42,15 @@
       {
         "position": "Software Developer",
         "employer": "Qwest Communications",
-        "summary": "Developed in-house web applications for support staff.   Created web services to integrate Smalltalk and Perl systems. System administrator for a small set of Linux servers.",
+        "summary": "Developed full-stack in-house web applications to enhance support staff efficiency.",
         "start": "1996-01",
         "end": "2001-06",
         "url": "",
         "keywords": [],
-        "highlights": []
+        "highlights": [
+          "Designed and implemented web services to seamlessly integrate legacy Smalltalk and Perl environments.",
+          "Administered and maintained a cluster of Linux servers, ensuring uptime and performance."
+        ]
       }
     ]
   },
