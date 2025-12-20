@@ -1,95 +1,173 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import resumeData from '../data/resume.json';
+import Layout from "../layouts/Layout.astro";
+import resumeData from "../data/resume.json";
 
-const { name, location, social, employment, education, skills } = resumeData;
+const { name, info, location, social, employment, education, skills } =
+    resumeData;
 ---
 
 <Layout title={`Resume - ${name}`}>
-  <div class="resume-wrapper">
-    <div class="resume-actions no-print">
-        <a href="/resume/resume.pdf" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">
-            Download PDF Version
-        </a>
-    </div>
+    <div class="resume-wrapper">
+        <!-- 
+        <div class="resume-actions no-print">
+            <a
+                href="/resume/resume.pdf"
+                class="btn btn-secondary"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Download PDF Version
+            </a>
+        </div>
+    -->
 
-    <div class="resume-paper">
-        <!-- Header -->
-        <header class="resume-header">
-            <h1>{name}</h1>
-            <div class="contact-info">
-                <span>
-                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                     {location.city}, {location.region}
-                </span>
-                {social.map(s => (
+        <div class="resume-paper">
+            <!-- Header -->
+            <header class="resume-header">
+                <div class="header-main">
+                    <h1>{name}</h1>
+                    <p class="professional-tagline">{info.label}</p>
+                </div>
+                <div class="contact-info">
                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-                        <a href={s.url} target="_blank">{s.network}</a>
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            ><path
+                                d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"
+                            ></path><circle cx="12" cy="10" r="3"></circle></svg
+                        >
+                        {location.city}, {location.region}
                     </span>
-                ))}
-            </div>
-        </header>
+                    {
+                        social.map((s) => (
+                            <span>
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    stroke-width="2"
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                >
+                                    <>
+                                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                    </>
+                                </svg>
+                                <a href={s.url} target="_blank">
+                                    {s.network}
+                                </a>
+                            </span>
+                        ))
+                    }
+                </div>
+            </header>
 
-        <div class="resume-grid">
-            <!-- Main Content (Left) -->
-            <main class="resume-main">
-                <section>
-                    <h3>Experience</h3>
-                    <div class="timeline">
-                        {employment.history.map(job => (
-                            <div class="timeline-item">
-                                <div class="job-header">
-                                    <h4>{job.position}</h4>
-                                    <span class="date">{job.start} — {job.end || 'Present'}</span>
+            <!-- Professional Summary Section -->
+            <section class="professional-summary">
+                <h3>Professional Summary</h3>
+                <p>{info.summary}</p>
+            </section>
+
+            <div class="resume-grid">
+                <!-- Main Content (Left) -->
+                <main class="resume-main">
+                    <section>
+                        <h3>Experience</h3>
+                        <div class="timeline">
+                            {
+                                employment.history.map((job) => (
+                                    <div class="timeline-item">
+                                        <div class="job-header">
+                                            <h4>{job.position}</h4>
+                                            <span class="date">
+                                                {job.start} —{" "}
+                                                {job.end || "Present"}
+                                            </span>
+                                        </div>
+                                        <h5
+                                            class={`company ${job.url ? "has-link" : ""}`}
+                                        >
+                                            {job.url ? (
+                                                <a
+                                                    href={job.url}
+                                                    target="_blank"
+                                                >
+                                                    {job.employer}
+                                                </a>
+                                            ) : (
+                                                job.employer
+                                            )}
+                                        </h5>
+                                        <p class="summary">{job.summary}</p>
+                                        {job.highlights &&
+                                            job.highlights.length > 0 && (
+                                                <ul class="highlights">
+                                                    {job.highlights.map(
+                                                        (highlight) => (
+                                                            <li>{highlight}</li>
+                                                        ),
+                                                    )}
+                                                </ul>
+                                            )}
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </section>
+                </main>
+
+                <!-- Sidebar (Right) -->
+                <aside class="resume-sidebar">
+                    <section>
+                        <h3>Skills</h3>
+                        <div class="skills-list">
+                            {
+                                skills.sets.map((skillSet) => (
+                                    <div class="skill-group">
+                                        <p>
+                                            <strong class="skill-name">
+                                                {skillSet.name}:
+                                            </strong>
+                                            {skillSet.skills.join(", ")}
+                                        </p>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </section>
+
+                    <section>
+                        <h3>Education</h3>
+                        {
+                            education.history.map((edu) => (
+                                <div class="edu-item">
+                                    <h4>{edu.institution}</h4>
+                                    <p class="degree">
+                                        {edu.studyType} in {edu.area}
+                                    </p>
+                                    <p class="date">
+                                        {edu.start} — {edu.end}
+                                    </p>
                                 </div>
-                                <h5 class={`company ${job.url ? 'has-link' : ''}`}>
-                                    {job.url ? <a href={job.url} target="_blank">{job.employer}</a> : job.employer}
-                                </h5>
-                                <p class="summary">{job.summary}</p>
-                                {job.highlights && job.highlights.length > 0 && (
-                                    <ul class="highlights">
-                                        {job.highlights.map(highlight => (
-                                            <li>{highlight}</li>
-                                        ))}
-                                    </ul>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </section>
-            </main>
-
-            <!-- Sidebar (Right) -->
-            <aside class="resume-sidebar">
-                <section>
-                    <h3>Skills</h3>
-                    <div class="skills-list">
-                    {skills.sets.map(skillSet => (
-                        <div class="skill-group">
-                            <p>
-                                <strong class="skill-name">{skillSet.name}:</strong> 
-                                {skillSet.skills.join(', ')}
-                            </p>
-                        </div>
-                    ))}
-                    </div>
-                </section>
-
-                <section>
-                    <h3>Education</h3>
-                    {education.history.map(edu => (
-                        <div class="edu-item">
-                            <h4>{edu.institution}</h4>
-                            <p class="degree">{edu.studyType} in {edu.area}</p>
-                            <p class="date">{edu.start} — {edu.end}</p>
-                        </div>
-                    ))}
-                </section>
-            </aside>
+                            ))
+                        }
+                    </section>
+                </aside>
+            </div>
         </div>
     </div>
-  </div>
 </Layout>
 
 <style>
@@ -106,35 +184,72 @@ const { name, location, social, employment, education, skills } = resumeData;
         margin-bottom: 2rem;
     }
 
-    /* Paper Effect */
+    /* Paper Effect - Now Organic Glass */
     .resume-paper {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
+        background: var(--bg-card);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border: 1px solid var(--glass-border);
+        border-radius: var(--radius-organic, 20px);
         padding: 3rem;
-        color: #333;
+        color: var(--text-main);
     }
 
     /* Header */
     .resume-header {
-        border-bottom: 2px solid #e0e0e0;
+        border-bottom: 1px solid var(--glass-border);
         padding-bottom: 2rem;
         margin-bottom: 2rem;
     }
 
     .resume-header h1 {
-        font-family: 'Georgia', serif;
-        font-size: 2.5rem;
-        color: #2c3e50;
-        margin-bottom: 0.5rem;
+        font-family: var(--font-main);
+        font-size: 3rem;
+        font-weight: 700;
+        /* Green to Gold gradient */
+        background: linear-gradient(135deg, #fff 0%, #34d399 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.25rem;
+    }
+
+    .professional-tagline {
+        font-size: 1.25rem;
+        color: var(--accent-primary);
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+
+    .professional-summary {
+        margin-bottom: 3rem;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid var(--glass-border);
+    }
+
+    .professional-summary h3 {
+        color: var(--accent-secondary);
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        margin-bottom: 1rem;
+    }
+
+    .professional-summary p {
+        font-size: 1.15rem;
+        line-height: 1.7;
+        color: var(--text-main);
+        max-width: 800px;
     }
 
     .contact-info {
         display: flex;
         gap: 1.5rem;
         flex-wrap: wrap;
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.95rem;
     }
 
@@ -145,21 +260,22 @@ const { name, location, social, employment, education, skills } = resumeData;
     }
 
     .contact-info svg {
-        opacity: 0.7;
+        opacity: 0.8;
+        color: var(--accent-secondary); /* Gold icons */
     }
 
     /* Grid Layout */
     .resume-grid {
         display: grid;
-        grid-template-columns: 3fr 1fr; /* Main content gets even more space */
+        grid-template-columns: 3fr 1fr;
         gap: 3rem;
     }
 
     /* Sidebar */
     .resume-sidebar h3 {
-        color: #2c3e50;
-        font-size: 1.1rem;
-        border-bottom: 1px solid #ddd;
+        color: #fff;
+        font-size: 1.2rem;
+        border-bottom: 1px solid var(--glass-border);
         padding-bottom: 0.5rem;
         margin-bottom: 1rem;
         margin-top: 0;
@@ -176,7 +292,7 @@ const { name, location, social, employment, education, skills } = resumeData;
     }
 
     .skill-name {
-        color: #2c3e50;
+        color: var(--accent-secondary);
         font-weight: 600;
         margin-right: 0.2rem;
     }
@@ -187,27 +303,29 @@ const { name, location, social, employment, education, skills } = resumeData;
 
     .edu-item h4 {
         font-size: 1rem;
-        color: #2c3e50;
+        color: #fff;
         margin-bottom: 0.2rem;
     }
 
     .degree {
         font-weight: 500;
         margin-bottom: 0.2rem;
+        color: var(--text-muted);
         font-size: 0.95rem;
     }
-    
+
     .date {
         font-size: 0.9rem;
-        color: #666;
+        color: var(--text-muted);
         font-style: italic;
+        opacity: 0.8;
     }
 
     /* Main Content */
     .resume-main h3 {
-        color: #2c3e50;
-        font-size: 1.5rem;
-        border-bottom: 2px solid #2c3e50;
+        color: #fff;
+        font-size: 1.75rem;
+        border-bottom: 1px solid var(--glass-border);
         padding-bottom: 0.5rem;
         margin-bottom: 1.5rem;
         margin-top: 0;
@@ -226,83 +344,121 @@ const { name, location, social, employment, education, skills } = resumeData;
     }
 
     .job-header h4 {
-        font-size: 1.25rem;
-        color: #2c3e50;
+        font-size: 1.3rem;
+        color: #fff;
         font-weight: 700;
         margin: 0;
     }
 
     .company {
         font-size: 1.1rem;
-        color: #27ae60;
+        color: var(--accent-primary);
         font-weight: 600;
         margin-bottom: 0.75rem;
     }
 
+    .company a {
+        color: var(--accent-primary);
+        text-decoration: none;
+        transition: color 0.2s;
+    }
+
+    .company a:hover {
+        color: var(--accent-secondary);
+    }
+
     .summary {
-        line-height: 1.6;
+        line-height: 1.7;
         margin-bottom: 1rem;
+        color: var(--text-muted);
     }
 
     .highlights {
         padding-left: 1.2rem;
-        line-height: 1.5;
+        line-height: 1.6;
+        color: var(--text-main);
     }
 
     .highlights li {
         margin-bottom: 0.4rem;
     }
 
-    a {
-        color: inherit;
-        text-decoration: none;
+    .highlights li::marker {
+        color: var(--accent-secondary);
     }
-    
+
+    a {
+        color: var(--accent-primary);
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+
     a:hover {
-        text-decoration: underline;
-        color: #27ae60;
+        color: var(--accent-secondary);
     }
 
     /* Responsive */
     @media (max-width: 768px) {
         .resume-grid {
-            grid-template-columns: 1fr; /* Stack on mobile */
+            grid-template-columns: 1fr;
             gap: 2rem;
         }
 
-        /* Order of stacking: Main content first, then sidebar */
+        .job-header {
+            flex-direction: column;
+        }
     }
 
-    /* Print Styles */
+    /* Print Styles - Keep these clean/white */
     @media print {
         .no-print {
             display: none !important;
         }
 
-        body, .cover-container {
+        body,
+        .cover-container {
             background: white !important;
             color: black !important;
+            background-image: none !important;
         }
 
         .resume-paper {
             box-shadow: none;
             padding: 0;
             background: white !important;
+            border: none !important;
+            color: black !important;
         }
 
         .resume-wrapper {
             max-width: 100%;
         }
-        
+
         a {
             text-decoration: none !important;
             color: black !important;
         }
-        
+
         .resume-grid {
-             display: grid;
-             grid-template-columns: 2.5fr 1fr; /* Keep proportion in print */
-             gap: 1.5cm;
+            display: grid;
+            grid-template-columns: 2.5fr 1fr;
+            gap: 1.5cm;
+        }
+
+        .resume-header h1,
+        .job-header h4,
+        .resume-main h3,
+        .resume-sidebar h3 {
+            color: black !important;
+            -webkit-text-fill-color: black !important;
+        }
+
+        .company {
+            color: #333 !important;
+        }
+
+        .skill-name {
+            color: #333 !important;
         }
     }
 </style>

@@ -1,60 +1,112 @@
 ---
-import '../styles/modern.css';
+import "../styles/modern.css";
 
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
 
 const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/music', label: 'Music' },
-    { href: '/resume', label: 'Resume' },
-    { href: '/contact', label: 'Contact' },
+  { href: "/", label: "Home" },
+  { href: "/music", label: "Music" },
+  { href: "/resume", label: "Resume" },
+  { href: "/contact", label: "Contact" },
 ];
 
 const currentPath = Astro.url.pathname;
 // Helper to determine if a link is active.
 // Note: when building statically, pathname might vary (trailing slash etc).
 // We'll do a simple normalize comparison.
-const normalize = (path: string) => path.replace(/\/$/, '') || '/';
+const normalize = (path: string) => path.replace(/\/$/, "") || "/";
 const normalizedCurrent = normalize(currentPath);
 
 const isActive = (href: string) => {
-    const normalizedHref = normalize(href);
-    if (normalizedHref === '/') {
-        return normalizedCurrent === '/';
-    }
-    return normalizedCurrent.startsWith(normalizedHref);
-}
+  const normalizedHref = normalize(href);
+  if (normalizedHref === "/") {
+    return normalizedCurrent === "/";
+  }
+  return normalizedCurrent.startsWith(normalizedHref);
+};
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Dave Tauzell - Musician and Composer">
-    <meta name="author" content="Dave Tauzell">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="Dave Tauzell - Musician and Composer" />
+    <meta name="author" content="Dave Tauzell" />
     <title>{title}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body class="text-center">
-
+    <div id="snow-container"></div>
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <h3 class="masthead-brand">Dave Tauzell</h3>
         <nav class="nav nav-masthead">
-            {navItems.map(item => (
-                <a 
-                    class:list={["nav-link", { active: isActive(item.href) }]} 
-                    href={item.href}
-                >
-                    {item.label}
-                </a>
-            ))}
+          {
+            navItems.map((item) => (
+              <a
+                class:list={["nav-link", { active: isActive(item.href) }]}
+                href={item.href}
+              >
+                {item.label}
+              </a>
+            ))
+          }
         </nav>
       </header>
+
+      <script is:inline>
+        function createSnowflake() {
+          // 1. Don't show snow on resume page
+          if (window.location.pathname.includes("/resume")) return;
+
+          const container = document.getElementById("snow-container");
+          const header = document.querySelector(".masthead");
+          if (!container || !header) return;
+
+          const snowflake = document.createElement("div");
+          snowflake.classList.add("snowflake");
+
+          const rect = header.getBoundingClientRect();
+
+          // Random properties
+          const size = Math.random() * 4 + 3 + "px";
+          const left = rect.left + Math.random() * rect.width + "px";
+          const duration = Math.random() * 4 + 4 + "s";
+          const drift = (Math.random() - 0.5) * 80 + "px";
+
+          snowflake.style.width = size;
+          snowflake.style.height = size;
+          snowflake.style.left = left;
+          snowflake.style.top = rect.bottom + "px"; // Start exactly at navbar bottom
+          snowflake.style.animation = `snow-fall-fade ${duration} linear forwards`;
+          snowflake.style.setProperty("--drift", drift);
+
+          container.appendChild(snowflake);
+
+          setTimeout(
+            () => {
+              snowflake.remove();
+            },
+            parseFloat(duration) * 1000,
+          );
+        }
+
+        // Spawn a bit faster for better effect
+        setInterval(createSnowflake, 300);
+      </script>
 
       <main role="main" class="inner cover">
         <slot />
@@ -66,6 +118,5 @@ const isActive = (href: string) => {
         </div>
       </footer>
     </div>
-
   </body>
 </html>

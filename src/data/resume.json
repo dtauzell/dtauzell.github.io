@@ -1,6 +1,9 @@
 {
   "name": "Dave Tauzell",
-  "info": {},
+  "info": {
+    "label": "Lead Engineer | Mission-Critical Distributed Systems",
+    "summary": "Strategic technical leader with 20+ years of experience architecting and operating high-volume, mission-critical infrastructure. Proven track record of leading teams to deliver sub-second performance in high-stakes healthcare networks handling billions of transactions annually with 99.99%+ availability."
+  },
   "meta": {
     "format": "FRESH@0.6.0",
     "version": "0.1.0"
@@ -15,18 +18,18 @@
   "employment": {
     "history": [
       {
-        "position": "Senior Software Engineer",
+        "position": "Lead Infrastructure Engineer",
         "employer": "Surescripts",
-        "summary": "Lead the Infrastructure Team in designing, coding, and maintaining high-volume, highly available healthcare systems critical to patient care.",
+        "summary": "Leading the core infrastructure team in architecting, developing, and operating high-throughput healthcare systems that form the backbone of national electronic prescription and clinical data exchange.",
         "current": true,
         "start": "2002-01-01",
         "end": "",
         "url": "http://surescripts.com",
         "keywords": [],
         "highlights": [
-          "Orchestrate comprehensive security reviews to ensure HIPAA compliance and system integrity.",
-          "Manage and optimize CI/CD pipelines using Jenkins, significantly improving deployment reliability.",
-          "Architect and maintain specialized internal tooling to empower support teams and reduce resolution times."
+          "Direct a team of engineers in designing distributed systems that process millions of transactions daily with high availability and strict sub-second SLAs.",
+          "Champion performance tuning and capacity planning initiatives, successfully scaling core messaging engines to handle massive traffic spikes while maintaining system integrity.",
+          "Establish technical roadmaps and engineering standards, mentoring developers across the organization in building resilient, fault-tolerant distributed systems."
         ]
       },
       {
