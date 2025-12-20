@@ -1,15 +1,21 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import trailsCover from "../assets/album_cover_trails_small.jpeg";
+import acousticaCover from "../assets/album_cover_acoustica1_small.jpeg";
 ---
 
 <Layout title="Music - Dave Tauzell">
     <div class="album-grid">
         <!-- Trails Album -->
         <div class="album-card">
-            <img
-                src="/images/album_cover_trails_small.jpeg"
+            <Image
+                src={trailsCover}
                 alt="Trails Album Cover"
                 class="album-cover"
+                width={180}
+                height={180}
+                loading="eager"
             />
             <div class="album-info">
                 <h3>Trails</h3>
@@ -95,10 +101,12 @@ import Layout from "../layouts/Layout.astro";
 
         <!-- Acoustica 1 Album -->
         <div class="album-card">
-            <img
-                src="/images/album_cover_acoustica1_small.jpeg"
+            <Image
+                src={acousticaCover}
                 alt="Acoustica 1 Album Cover"
                 class="album-cover"
+                width={180}
+                height={180}
             />
             <div class="album-info">
                 <h3>Acoustica 1</h3>
