@@ -1,5 +1,7 @@
 ---
 import "../styles/modern.css";
+import { getImage } from "astro:assets";
+import navbarForest from "../assets/navbar_forest.png";
 
 interface Props {
   title: string;
@@ -28,6 +30,12 @@ const isActive = (href: string) => {
   }
   return normalizedCurrent.startsWith(normalizedHref);
 };
+
+const optimizedBackground = await getImage({
+  src: navbarForest,
+  format: "webp",
+  quality: 80,
+});
 ---
 
 <!doctype html>
@@ -51,7 +59,10 @@ const isActive = (href: string) => {
   <body class="text-center">
     <div id="snow-container"></div>
     <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-auto">
+      <header
+        class="masthead mb-auto"
+        style={`background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url(${optimizedBackground.src});`}
+      >
         <h3 class="masthead-brand">Dave Tauzell</h3>
         <nav class="nav nav-masthead">
           {

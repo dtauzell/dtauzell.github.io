@@ -62,7 +62,7 @@ body {
   border-bottom: 1px solid var(--glass-border);
   position: relative;
   /* Forest background with dark overlay */
-  background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), url('../assets/navbar_forest.png');
+  /* Forest background with dark overlay - handled by Astro optimization in Layout.astro */
   background-size: cover;
   background-position: center 40%;
   border-radius: var(--radius-organic);
