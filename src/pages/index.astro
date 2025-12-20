@@ -1,5 +1,7 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { Image } from "astro:assets";
+import trailsCover from "../assets/album_cover_trails_small.jpeg";
 ---
 
 <Layout title="Dave Tauzell - Musician">
@@ -8,10 +10,13 @@ import Layout from "../layouts/Layout.astro";
         Trails is my latest instrumental album featuring atmospheric
         compositions and melodic journeys.
     </p>
-    <img
-        src="/images/album_cover_trails_small.jpeg"
+    <Image
+        src={trailsCover}
         alt="Trails Album Cover"
         class="album-cover-main"
+        width={280}
+        height={280}
+        loading="eager"
     />
     <div class="streaming-links">
         <a
