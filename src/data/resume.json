@@ -1,8 +1,8 @@
 {
   "name": "Dave Tauzell",
   "info": {
-    "label": "Lead Engineer | Mission-Critical Distributed Systems",
-    "summary": "Strategic technical leader with 20+ years of experience architecting and operating high-volume, mission-critical infrastructure. Proven track record of leading teams to deliver sub-second performance in high-stakes healthcare networks handling billions of transactions annually with 99.99%+ availability."
+    "label": "Senior Principal Software Engineer",
+    "summary": "Strategic technical leader with 20+ years of experience architecting and operating high-volume, mission-critical infrastructure. Proven track record of leading teams to deliver sub-second performance in high-stakes healthcare networks handling billions of transactions annually with high availability."
   },
   "meta": {
     "format": "FRESH@0.6.0",
@@ -18,9 +18,9 @@
   "employment": {
     "history": [
       {
-        "position": "Lead Infrastructure Engineer",
+        "position": "Senior Principal Software Engineer",
         "employer": "Surescripts",
-        "summary": "Leading the core infrastructure team in architecting, developing, and operating high-throughput healthcare systems that form the backbone of national electronic prescription and clinical data exchange.",
+        "summary": "",
         "current": true,
         "start": "2002-01-01",
         "end": "",
@@ -28,7 +28,7 @@
         "keywords": [],
         "highlights": [
           "Direct a team of engineers in designing distributed systems that process millions of transactions daily with high availability and strict sub-second SLAs.",
-          "Champion performance tuning and capacity planning initiatives, successfully scaling core messaging engines to handle massive traffic spikes while maintaining system integrity.",
+          "Champion performance tuning and capacity planning initiatives, successfully scaling core messaging engines to handle traffic spikes while maintaining system integrity.",
           "Establish technical roadmaps and engineering standards, mentoring developers across the organization in building resilient, fault-tolerant distributed systems."
         ]
       },
@@ -80,12 +80,13 @@
         "skills": [
           "Java",
           "C#",
-          "Perl",
           "Python",
           "SQL",
-          "Some Hadoop",
-          "Queuing Systems",
-          "Oracle"
+          "Hadoop/Big Query",
+          "IBM MQ/Kafka",
+          "Oracle/Postgres",
+          "Perl",
+          "Linux Systems"
         ]
       },
       {
@@ -114,12 +115,6 @@
       "network": "LinkedIn",
       "url": "https://www.linkedin.com/in/dtauzell",
       "user": ""
-    },
-    {
-      "label": "stackoverflow",
-      "network": "stackoverflow",
-      "url": "http://stackoverflow.com/users/3095/dave",
-      "user": "3095"
     }
   ],
   "interests": [],
