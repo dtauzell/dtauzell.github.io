@@ -1,11 +1,52 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="Contact - Dave Tauzell">
-    <h1 class="cover-heading">Get in Touch</h1>
+    <h2 class="cover-heading">Get in Touch</h2>
     <p class="lead">For booking, collaboration, or just to say hello</p>
-    <p class="lead">
-    <a href="mailto:dave@tauzell.org" class="btn btn-lg btn-secondary">dave@tauzell.org</a>
-    </p>
+
+    <div class="contact-form-container">
+        <form
+            name="contact"
+            method="POST"
+            data-netlify="true"
+            action="/success"
+            class="contact-form"
+        >
+            <input type="hidden" name="form-name" value="contact" />
+
+            <div class="form-group">
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Your Email"
+                    required
+                />
+            </div>
+
+            <div class="form-group">
+                <textarea
+                    name="message"
+                    rows="5"
+                    placeholder="Your Message"
+                    required></textarea>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-lg btn-secondary w-100"
+                    >Send Message</button
+                >
+            </div>
+        </form>
+    </div>
 </Layout>
