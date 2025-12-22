@@ -46,7 +46,7 @@ body {
 .cover-container {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -54,7 +54,7 @@ body {
 
 /* Header / Masthead */
 .masthead {
-  padding: 2rem 2rem;
+  padding: 1.25rem 2rem;
   margin-bottom: 1rem;
   display: flex;
   justify-content: space-between;
@@ -129,14 +129,14 @@ body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 4rem 0;
+  padding: 2rem 0;
 }
 
 .cover-heading {
   font-size: 4rem;
   font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem;
   letter-spacing: -0.02em;
   /* Organic green to gold gradient */
   background: linear-gradient(135deg, #f0fdf4 0%, #34d399 50%, #fbbf24 100%);
@@ -149,7 +149,7 @@ body {
 .lead {
   font-size: 1.25rem;
   color: var(--text-muted);
-  margin-bottom: 3rem;
+  margin-bottom: 1.5rem;
   max-width: 650px;
   font-weight: 300;
   line-height: 1.8;
@@ -200,7 +200,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 2rem;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1.25rem;
 }
 
 /* Glassmorphism Card Style - Organic */
@@ -326,7 +326,7 @@ body {
 /* Footer */
 .mastfoot {
   margin-top: auto;
-  padding: 3rem 0 2rem;
+  padding: 1.5rem 0;
   text-align: center;
   color: rgba(255, 255, 255, 0.2);
   font-size: 0.875rem;
@@ -354,7 +354,7 @@ body {
   width: 280px;
   height: auto;
   border-radius: 20px;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
   box-shadow: 0 0 50px rgba(52, 211, 153, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.1);
   object-fit: cover;
@@ -429,14 +429,14 @@ body {
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-organic);
-  padding: 3rem;
+  padding: 2rem;
   box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.4);
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 }
 
 .form-group {
