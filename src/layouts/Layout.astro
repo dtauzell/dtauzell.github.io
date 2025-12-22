@@ -95,7 +95,7 @@ const optimizedBackground = await getImage({
           // Random properties
           const size = Math.random() * 4 + 3 + "px";
           const left = rect.left + Math.random() * rect.width + "px";
-          const duration = Math.random() * 4 + 4 + "s";
+          const duration = Math.random() * 10 + 4 + "s";
           const drift = (Math.random() - 0.5) * 80 + "px";
 
           snowflake.style.width = size;
@@ -116,7 +116,7 @@ const optimizedBackground = await getImage({
         }
 
         // Spawn a bit faster for better effect
-        setInterval(createSnowflake, 300);
+        setInterval(createSnowflake, 750);
       </script>
 
       <main role="main" class="inner cover">
